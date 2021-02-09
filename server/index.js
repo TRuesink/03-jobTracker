@@ -1,16 +1,26 @@
 const express = require("express");
 const morgan = require("morgan");
 const cookieSession = require("cookie-session");
-
+const passport = require("passport");
 require("colors");
-
 if (process.env.NODE_ENV !== "production") {
   const dotenv = require("dotenv");
   dotenv.config({ path: "./config/config.env" });
 }
 
+require("./middlewares/passport");
+
+//
+const connectDB = require("./utils/connectDB");
+
+// routers
+const authRouter = require("./routers/authRouter");
+
 // init server
 const app = express();
+
+// connect DB
+connectDB();
 
 // middlewares
 app.use(morgan("dev")); // logging
@@ -22,6 +32,13 @@ app.use(
     maxAge: 15 * 24 * 60 * 60 * 1000,
   })
 );
+
+// passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// mount routers
+app.use("/api/v1/auth", authRouter);
 
 // if in production or test production, use react build
 if (
