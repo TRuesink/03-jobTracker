@@ -21,7 +21,7 @@ router
   .route("/")
   .get(
     protect,
-    advancedResults(Opportunity, { path: "user", select: "name" }),
+    advancedResults(Opportunity, true, { path: "user", select: "name" }),
     getOpportunities
   )
   .post(protect, createOpportunity);

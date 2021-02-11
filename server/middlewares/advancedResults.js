@@ -1,4 +1,8 @@
-const advancedResults = (model, ...populate) => async (req, res, next) => {
+const advancedResults = (model, private, ...populate) => async (
+  req,
+  res,
+  next
+) => {
   let query;
 
   // create a copy of the query
@@ -19,8 +23,13 @@ const advancedResults = (model, ...populate) => async (req, res, next) => {
     (match) => `$${match}`
   );
 
+  let queryObj = JSON.parse(queryStr);
+
+  if (private) {
+    queryObj.user = req.user.id;
+  }
   // begin creating the query
-  query = model.find(JSON.parse(queryStr));
+  query = model.find(queryObj);
 
   // select fields
   if (req.query.select) {

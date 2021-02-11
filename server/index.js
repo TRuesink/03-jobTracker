@@ -17,6 +17,7 @@ const connectDB = require("./utils/connectDB");
 // routers
 const authRouter = require("./routers/authRouter");
 const opportunityRouter = require("./routers/opportunityRouter");
+const scriptRouter = require("./routers/scriptRouter");
 
 // init server
 const app = express();
@@ -42,6 +43,7 @@ app.use(passport.session());
 // mount routers
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/opportunities", opportunityRouter);
+app.use("/api/v1/scripts", scriptRouter);
 
 // custom error handler
 app.use(errorHandler);
