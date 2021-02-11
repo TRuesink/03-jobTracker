@@ -8,6 +8,7 @@ if (process.env.NODE_ENV !== "production") {
   dotenv.config({ path: "./config/config.env" });
 }
 
+const errorHandler = require("./middlewares/error");
 require("./middlewares/passport");
 
 //
@@ -15,6 +16,7 @@ const connectDB = require("./utils/connectDB");
 
 // routers
 const authRouter = require("./routers/authRouter");
+const opportunityRouter = require("./routers/opportunityRouter");
 
 // init server
 const app = express();
@@ -39,6 +41,10 @@ app.use(passport.session());
 
 // mount routers
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/opportunities", opportunityRouter);
+
+// custom error handler
+app.use(errorHandler);
 
 // if in production or test production, use react build
 if (

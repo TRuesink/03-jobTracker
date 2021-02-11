@@ -9,6 +9,10 @@ exports.authGoogleCallback = (req, res) => {
   res.status(200).json({ success: true, user: req.user });
 };
 
+exports.authGoogleToken = (req, res) => {
+  res.status(200).json({ success: true, user: req.user });
+};
+
 exports.googleLogout = (req, res) => {
   req.logout();
   res.status(200).json({ success: true, user: [] });
