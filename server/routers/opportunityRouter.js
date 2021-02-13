@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const noteRouter = require("./noteRouter");
 
 const {
   getOpportunities,
@@ -15,6 +16,9 @@ const Opportunity = require("../models/Opportunity");
 //middlewares
 const { protect, permissions } = require("../middlewares/auth");
 const advancedResults = require("../middlewares/advancedResults");
+
+//redirect
+router.use("/:oppId/notes", noteRouter);
 
 //routes
 router

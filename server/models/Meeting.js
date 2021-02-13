@@ -11,6 +11,11 @@ const meetingSchema = new Schema({
     ref: "Contact",
     required: false,
   },
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
+    required: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

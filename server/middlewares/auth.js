@@ -1,4 +1,5 @@
 const ErrorResponse = require("../utils/errorResponse");
+const asyncHandler = require("./async");
 
 exports.protect = (req, res, next) => {
   if (!req.user) {

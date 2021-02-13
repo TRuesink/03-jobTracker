@@ -2,13 +2,8 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
-const activitySchema = new Schema({
-  description: { type: String, required: true },
-  contact: {
-    type: mongoose.Schema.ObjectId,
-    ref: "Contact",
-    required: false,
-  },
+const noteSchema = new Schema({
+  content: { type: String, required: true },
   opportunity: {
     type: mongoose.Schema.ObjectId,
     ref: "Opportunity",
@@ -25,6 +20,6 @@ const activitySchema = new Schema({
   },
 });
 
-const activityClass = mongoose.model("Activity", activitySchema);
+const noteClass = mongoose.model("Note", noteSchema);
 
-module.exports = activityClass;
+module.exports = noteClass;
