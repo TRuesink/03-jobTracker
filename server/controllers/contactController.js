@@ -33,7 +33,7 @@ exports.createContact = asyncHandler(async (req, res, next) => {
 
   if (!opp) {
     return next(
-      new ErrorResponse(`opportunity not found with id of ${req.params.id}`)
+      new ErrorResponse(`opportunity not found with id of ${req.params.oppId}`)
     );
   }
 

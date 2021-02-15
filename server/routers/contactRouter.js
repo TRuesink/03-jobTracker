@@ -2,6 +2,8 @@ const express = require("express");
 
 const router = express.Router({ mergeParams: true });
 
+const meetingRouter = require("./meetingRouter");
+
 const {
   getContacts,
   createContact,
@@ -12,6 +14,9 @@ const {
 
 //model
 const Contact = require("../models/Contact");
+
+//redirect
+router.use("/:contactId/meetings", meetingRouter);
 
 //middlewares
 const { protect, permissions } = require("../middlewares/auth");

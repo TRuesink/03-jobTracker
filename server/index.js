@@ -21,6 +21,7 @@ const scriptRouter = require("./routers/scriptRouter");
 const noteRouter = require("./routers/noteRouter");
 const contactRouter = require("./routers/contactRouter");
 const activityRouter = require("./routers/activityRouter");
+const meetingRouter = require("./routers/meetingRouter");
 
 // init server
 const app = express();
@@ -50,6 +51,7 @@ app.use("/api/v1/scripts", scriptRouter);
 app.use("/api/v1/notes", noteRouter);
 app.use("/api/v1/contacts", contactRouter);
 app.use("/api/v1/activities", activityRouter);
+app.use("/api/v1/meetings", meetingRouter);
 
 // custom error handler
 app.use(errorHandler);

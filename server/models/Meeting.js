@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const meetingSchema = new Schema({
   topic: { type: String, required: true },
-  meetingDate: { type: Date, required: true },
+  meetingDate: { type: Date, required: false },
   notes: { type: String, required: false },
   contact: {
     type: mongoose.Schema.ObjectId,
