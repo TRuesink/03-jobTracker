@@ -11,11 +11,6 @@ const contactSchema = new Schema({
   email: { type: String, required: false },
   phone: { type: String, required: false },
   touches: { type: Number, default: 0 },
-  activity: {
-    type: mongoose.Schema.ObjectId,
-    ref: "Activity",
-    required: false,
-  },
   opportunity: {
     type: mongoose.Schema.ObjectId,
     ref: "Opportunity",

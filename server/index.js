@@ -19,6 +19,7 @@ const authRouter = require("./routers/authRouter");
 const opportunityRouter = require("./routers/opportunityRouter");
 const scriptRouter = require("./routers/scriptRouter");
 const noteRouter = require("./routers/noteRouter");
+const contactRouter = require("./routers/contactRouter");
 
 // init server
 const app = express();
@@ -46,6 +47,7 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/opportunities", opportunityRouter);
 app.use("/api/v1/scripts", scriptRouter);
 app.use("/api/v1/notes", noteRouter);
+app.use("/api/v1/contacts", contactRouter);
 
 // custom error handler
 app.use(errorHandler);

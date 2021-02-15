@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const noteRouter = require("./noteRouter");
+const contactRouter = require("./contactRouter");
 
 const {
   getOpportunities,
@@ -19,6 +20,7 @@ const advancedResults = require("../middlewares/advancedResults");
 
 //redirect
 router.use("/:oppId/notes", noteRouter);
+router.use("/:oppId/contacts", contactRouter);
 
 //routes
 router
