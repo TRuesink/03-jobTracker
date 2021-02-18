@@ -6,7 +6,13 @@ import Home from "./home/Home";
 import OpportunityList from "./opportunities/OpportunityList";
 import SideMenu from "./SideMenu";
 
+import { connect } from "react-redux";
+import { getMe } from "../actions";
+
 class App extends React.Component {
+  componentDidMount() {
+    this.props.getMe();
+  }
   render() {
     return (
       <div>
@@ -27,4 +33,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect(null, { getMe })(App);

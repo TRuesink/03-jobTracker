@@ -6,7 +6,10 @@ const {
   authGoogleCallback,
   googleLogout,
   authGoogleToken,
+  getMe,
 } = require("../controllers/authController");
+
+const { protect } = require("../middlewares/auth");
 
 const router = express.Router();
 
@@ -18,6 +21,8 @@ router
 router
   .route("/google/token")
   .get(passport.authenticate("google-token"), authGoogleToken);
+
+router.route("/me").get(protect, getMe);
 
 router.route("/logout").get(googleLogout);
 

@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const cookieSession = require("cookie-session");
+const cors = require("cors");
 const passport = require("passport");
 require("colors");
 if (process.env.NODE_ENV !== "production") {
@@ -30,6 +31,7 @@ const app = express();
 connectDB();
 
 // middlewares
+
 app.use(morgan("dev")); // logging
 app.use(express.json()); // body parsing
 app.use(
@@ -52,6 +54,8 @@ app.use("/api/v1/notes", noteRouter);
 app.use("/api/v1/contacts", contactRouter);
 app.use("/api/v1/activities", activityRouter);
 app.use("/api/v1/meetings", meetingRouter);
+
+app.use(cors());
 
 // custom error handler
 app.use(errorHandler);

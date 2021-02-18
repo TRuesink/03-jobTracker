@@ -6,14 +6,18 @@ exports.authGoogle = passport.authenticate("google", {
 });
 
 exports.authGoogleCallback = (req, res) => {
-  res.status(200).json({ success: true, user: req.user });
+  res.status(200).redirect("/");
 };
 
 exports.authGoogleToken = (req, res) => {
   res.status(200).json({ success: true, user: req.user });
 };
 
+exports.getMe = (req, res) => {
+  res.status(200).json({ success: true, user: req.user });
+};
+
 exports.googleLogout = (req, res) => {
   req.logout();
-  res.status(200).json({ success: true, user: [] });
+  res.status(200).json({ success: true, user: null });
 };
