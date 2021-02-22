@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 class SideMenu extends React.Component {
   render() {
     return (
-      <div className="ui vertical menu">
+      <div className="ui left fluid vertical menu">
         <NavLink to="/home" className="item">
           Home
           <div className="ui label">1</div>

@@ -58,3 +58,6 @@ export const GET_ME = "GET_ME";
 export const SIGN_OUT = "SIGN_OUT";
 export const AUTH_IN_PROGRESS = "AUTH_IN_PROGRESS";
 export const AUTH_ERROR = "AUTH_ERROR";
+
+// Error Types
+export const ERROR = "ERROR";

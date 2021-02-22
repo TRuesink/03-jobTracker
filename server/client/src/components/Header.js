@@ -8,7 +8,8 @@ class Header extends React.Component {
     if (!this.props.auth.user) {
       return (
         <>
-          <a href="/api/v1/auth/google" className="ui primary button">
+          <a href="/api/v1/auth/google" className="ui google plus button">
+            <i className="google icon"></i>
             Sign In With Google
           </a>
         </>
@@ -20,6 +21,7 @@ class Header extends React.Component {
             onClick={() => this.props.signOut()}
             className="ui primary button"
           >
+            <i className="sign out icon"></i>
             Sign Out
           </button>
         </>

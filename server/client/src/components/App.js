@@ -18,7 +18,7 @@ class App extends React.Component {
       <div>
         <Router history={history}>
           <Header />
-          <div className="ui grid">
+          <div style={{ margin: "1rem" }} className="ui stackable grid">
             <div className="four wide column">
               <SideMenu />
             </div>

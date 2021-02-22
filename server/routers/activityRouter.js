@@ -19,7 +19,11 @@ const advancedResults = require("../middlewares/advancedResults");
 
 router
   .route("/")
-  .get(protect, advancedResults(Activity, true), getActivities)
+  .get(
+    protect,
+    advancedResults(Activity, true, { path: "opportunity", select: "name" }),
+    getActivities
+  )
   .post(protect, createActivity);
 
 router
