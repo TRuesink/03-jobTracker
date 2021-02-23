@@ -7,6 +7,7 @@ import {
   fetchMeetings,
 } from "../../actions";
 import ActivityFeed from "../activities/ActivityFeed";
+import OpportunityList from "../opportunities/OpportunityList";
 import UserStats from "./UserStats";
 
 class Home extends React.Component {
@@ -22,7 +23,9 @@ class Home extends React.Component {
         <UserStats />
         <div className="ui stackable grid">
           <div className="ten wide column">
-            <div>test</div>
+            <div>
+              <OpportunityList />
+            </div>
           </div>
           <div className="six wide column">
             <div className="ui segment">

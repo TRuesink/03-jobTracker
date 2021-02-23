@@ -3,6 +3,7 @@ import axios from "axios";
 import {
   AUTH_ERROR,
   AUTH_IN_PROGRESS,
+  EDIT_OPPORTUNITY,
   ERROR,
   ERROR_ACTIVITY,
   ERROR_CONTACT,
@@ -54,6 +55,21 @@ export const fetchOpportunities = () => {
       dispatch({ type: IN_PROGRESS_OPPORTUNITY });
       const response = await axios.get("/api/v1/opportunities");
       dispatch({ type: FETCH_OPPORTUNITIES, payload: response.data });
+    } catch (error) {
+      dispatch({ type: ERROR_OPPORTUNITY });
+    }
+  };
+};
+
+export const editOpportunity = (opportunityId, formValues) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: IN_PROGRESS_OPPORTUNITY });
+      const response = await axios.put(
+        `/api/v1/opportunities/${opportunityId}`,
+        formValues
+      );
+      dispatch({ type: EDIT_OPPORTUNITY, payload: response.data });
     } catch (error) {
       dispatch({ type: ERROR_OPPORTUNITY });
     }

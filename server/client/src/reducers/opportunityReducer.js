@@ -26,6 +26,11 @@ const opportunityReducer = (state = INIT_STATE, action) => {
         data: { ...state.data, ..._.mapKeys(action.payload.data, "_id") },
         inProgress: false,
       };
+    case EDIT_OPPORTUNITY:
+      return {
+        data: { ...state.data, [action.payload.data._id]: action.payload.data },
+        inProgress: false,
+      };
     case ERROR_OPPORTUNITY:
       return {
         data: { ...state.data },
