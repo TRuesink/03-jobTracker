@@ -8,6 +8,7 @@ import SideMenu from "./SideMenu";
 
 import { connect } from "react-redux";
 import { getMe } from "../actions";
+import OpportunityDetail from "./opportunities/OpportunityDetail";
 
 class App extends React.Component {
   componentDidMount() {
@@ -23,8 +24,19 @@ class App extends React.Component {
               <SideMenu />
             </div>
             <div className="twelve wide column">
-              <Route path="/home" exact component={Home} />
-              <Route path="/opportunities" exact component={OpportunityList} />
+              <Switch>
+                <Route path="/home" exact component={Home} />
+                <Route
+                  path="/opportunities/:id"
+                  exact
+                  component={OpportunityDetail}
+                />
+                <Route
+                  path="/opportunities"
+                  exact
+                  component={OpportunityList}
+                />
+              </Switch>
             </div>
           </div>
         </Router>
