@@ -17,7 +17,7 @@ class OpportunityList extends React.Component {
       return (
         <tr className={colorClass + " " + statusClass}>
           <td>
-            <Link>{opp.name}</Link>
+            <Link to={`/opportunities/${opp._id}`}>{opp.name}</Link>
           </td>
           <td>{opp.stage}</td>
           <td>{"test"}</td>

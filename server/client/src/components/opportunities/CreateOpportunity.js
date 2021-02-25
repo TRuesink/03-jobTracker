@@ -1,34 +1,44 @@
 import React from "react";
 import { Button, Header, Image, Modal } from "semantic-ui-react";
+import OpportunityForm from "./OpportunityForm";
 
-function CreateOpportunity() {
-  const [open, setOpen] = React.useState(false);
-
-  return (
-    <Modal
-      onClose={() => setOpen(false)}
-      onOpen={() => setOpen(true)}
-      open={open}
-      trigger={
-        <Button className="right floated primary">Add Opportunity</Button>
-      }
-    >
-      <Modal.Header>Create An Opportunity</Modal.Header>
-      <Modal.Content>test</Modal.Content>
-      <Modal.Actions>
-        <Button color="black" onClick={() => setOpen(false)}>
-          Nope
-        </Button>
-        <Button
-          content="Yep, that's me"
-          labelPosition="right"
-          icon="checkmark"
-          onClick={() => setOpen(false)}
-          positive
-        />
-      </Modal.Actions>
-    </Modal>
-  );
+class CreateOpportunity extends React.Component {
+  state = { open: false };
+  changeModalState = (val) => {
+    this.setState({ open: val });
+  };
+  render() {
+    return (
+      <Modal
+        onClose={() => this.changeModalState(false)}
+        onOpen={() => this.changeModalState(true)}
+        open={this.state.open}
+        trigger={
+          <Button className="right floated primary">Add Opportunity</Button>
+        }
+      >
+        <Modal.Header>Create An Opportunity</Modal.Header>
+        <Modal.Content>
+          <div>
+            <OpportunityForm closeModal={this.changeModalState} />
+          </div>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button color="red" onClick={() => this.changeModalState(false)}>
+            Cancel
+          </Button>
+          <Button
+            form="oppForm"
+            content="Submit"
+            labelPosition="right"
+            icon="checkmark"
+            // onClick={() => this.onCloseModal()}
+            primary
+          />
+        </Modal.Actions>
+      </Modal>
+    );
+  }
 }
 
 export default CreateOpportunity;

@@ -18,7 +18,13 @@ exports.createOpportunity = asyncHandler(async (req, res, next) => {
   let newOpportunity = await Opportunity.create(req.body);
 
   newOpportunity = await newOpportunity
-    .populate({ path: "user", select: "name" })
+    .populate([
+      {
+        path: "user",
+        select: "name",
+      },
+      { path: "activities" },
+    ])
     .execPopulate();
 
   res.status(201).json({ success: true, data: newOpportunity });
@@ -49,7 +55,13 @@ exports.editOpportunity = asyncHandler(async (req, res, next) => {
   opportunity = await Opportunity.findByIdAndUpdate(req.params.id, req.body, {
     runValidators: true,
     new: true,
-  }).populate({ path: "user", select: "name" });
+  }).populate([
+    {
+      path: "user",
+      select: "name",
+    },
+    { path: "activities" },
+  ]);
   res.status(200).json({ success: true, data: opportunity });
 });
 
@@ -57,10 +69,13 @@ exports.editOpportunity = asyncHandler(async (req, res, next) => {
 // @route GET /api/v1/opportunities/:id
 // @access PRIVATE
 exports.getOpportunity = asyncHandler(async (req, res, next) => {
-  let opportunity = await Opportunity.findById(req.params.id).populate({
-    path: "user",
-    select: "name",
-  });
+  let opportunity = await Opportunity.findById(req.params.id).populate([
+    {
+      path: "user",
+      select: "name",
+    },
+    { path: "activities" },
+  ]);
 
   if (!opportunity) {
     return next(
