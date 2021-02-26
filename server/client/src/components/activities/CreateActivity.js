@@ -1,10 +1,8 @@
 import React from "react";
 import { Button, Header, Image, Modal } from "semantic-ui-react";
-import OpportunityForm from "./OpportunityForm";
 
-class CreateOpportunity extends React.Component {
+class CreateActivity extends React.Component {
   state = { open: false };
-
   changeModalState = (val) => {
     this.setState({ open: val });
   };
@@ -20,11 +18,9 @@ class CreateOpportunity extends React.Component {
           </Button>
         }
       >
-        <Modal.Header>Create An Opportunity</Modal.Header>
+        <Modal.Header>Create An Activity</Modal.Header>
         <Modal.Content>
-          <div>
-            <OpportunityForm closeModal={this.changeModalState} />
-          </div>
+          <div></div>
         </Modal.Content>
         <Modal.Actions>
           <Button color="red" onClick={() => this.changeModalState(false)}>
@@ -44,4 +40,4 @@ class CreateOpportunity extends React.Component {
   }
 }
 
-export default CreateOpportunity;
+export default CreateActivity;

@@ -12,7 +12,10 @@ exports.getActivities = asyncHandler(async (req, res, next) => {
     const activities = await Activity.find({
       opportunity: req.params.oppId,
       user: req.user.id,
-    }).populate({ path: "opportunity", select: "name" });
+    }).populate([
+      { path: "opportunity", select: "name" },
+      { path: "contact", select: "name" },
+    ]);
     res.status(200).json({
       success: true,
       count: activities.length,

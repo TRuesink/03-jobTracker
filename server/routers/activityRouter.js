@@ -21,7 +21,12 @@ router
   .route("/")
   .get(
     protect,
-    advancedResults(Activity, true, { path: "opportunity", select: "name" }),
+    advancedResults(
+      Activity,
+      true,
+      { path: "opportunity", select: "name" },
+      { path: "contact", select: "name" }
+    ),
     getActivities
   )
   .post(protect, createActivity);

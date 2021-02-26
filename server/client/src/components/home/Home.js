@@ -28,9 +28,7 @@ class Home extends React.Component {
             </div>
           </div>
           <div className="six wide column">
-            <div className="ui segment">
-              <ActivityFeed />
-            </div>
+            <ActivityFeed />
           </div>
         </div>
       </div>

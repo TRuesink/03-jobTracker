@@ -50,8 +50,6 @@ class OpportunityList extends React.Component {
     this.props.fetchOpportunities();
   }
 
-  state = { editMode: false };
-
   renderDropdown({ input, options }) {
     return (
       <Form.Select
@@ -84,7 +82,7 @@ class OpportunityList extends React.Component {
         console.log(lastActivity);
         return (
           <tr key={opp._id} className={colorClass + " " + statusClass}>
-            <td>
+            <td style={{ paddingLeft: "0.7em" }}>
               <Link to={`/opportunities/${opp._id}`}>{opp.name}</Link>
             </td>
             <td>
@@ -96,7 +94,6 @@ class OpportunityList extends React.Component {
                 }
                 defaultValue={opp.stage}
                 loading={false}
-                disabled={!this.state.editMode}
               />
             </td>
             <td>
@@ -114,43 +111,41 @@ class OpportunityList extends React.Component {
       ? "ui active loader"
       : "ui disabled loader";
     return (
-      <>
-        <div class={loaderClass}></div>
-        <table class="ui compact selectable single line table">
-          <thead class="full-width">
-            <tr>
-              <th>Name</th>
-              <th>Stage</th>
-              <th>Last Activity</th>
-            </tr>
-          </thead>
-          <tbody>{this.renderOpportunities()}</tbody>
-          <tfoot class="full-width">
-            <tr>
-              <th>
-                {this.state.editMode ? (
-                  <button
-                    onClick={() => this.setState({ editMode: false })}
-                    className="ui primary basic button"
-                  >
-                    Save
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => this.setState({ editMode: true })}
-                    className="ui primary basic button"
-                  >
-                    Edit
-                  </button>
-                )}
-              </th>
-              <th colSpan="4">
-                <CreateOpportunity />
-              </th>
-            </tr>
-          </tfoot>
-        </table>
-      </>
+      <div className="ui segments">
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+          className="ui secondary segment"
+        >
+          <h3 style={{ marginBottom: "0" }}>Opportunities</h3>
+          <CreateOpportunity />
+        </div>
+
+        <div
+          style={{
+            padding: "0",
+          }}
+          className="ui segment"
+        >
+          <div class={loaderClass}></div>
+          <table class="ui compact selectable very basic table">
+            <thead class="full-width">
+              <tr>
+                <th style={{ paddingLeft: "0.7em" }}>Name</th>
+                <th>Stage</th>
+                <th>Last Activity</th>
+              </tr>
+            </thead>
+            <tbody>{this.renderOpportunities()}</tbody>
+            <tfoot class="full-width">
+              <tr></tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
     );
   }
 }

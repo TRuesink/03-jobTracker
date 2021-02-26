@@ -27,7 +27,14 @@ class ActivityFeed extends React.Component {
     });
   }
   render() {
-    return <div className="ui feed">{this.renderActivities()}</div>;
+    return (
+      <div className="ui segments">
+        <div className="ui secondary segment">Activity Feed</div>
+        <div className="ui segment">
+          <div className="ui feed">{this.renderActivities()}</div>
+        </div>
+      </div>
+    );
   }
 }
 

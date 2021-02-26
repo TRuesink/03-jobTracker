@@ -9,6 +9,7 @@ import SideMenu from "./SideMenu";
 import { connect } from "react-redux";
 import { getMe } from "../actions";
 import OpportunityDetail from "./opportunities/OpportunityDetail";
+import ActivityList from "./activities/ActivityList";
 
 class App extends React.Component {
   componentDidMount() {
@@ -36,6 +37,7 @@ class App extends React.Component {
                   exact
                   component={OpportunityList}
                 />
+                <Route path="/activities" exact component={ActivityList} />
               </Switch>
             </div>
           </div>
