@@ -1,5 +1,7 @@
 import React from "react";
 import { Button, Header, Image, Modal } from "semantic-ui-react";
+import { connect } from "react-redux";
+import { createOpportunity } from "../../actions";
 import OpportunityForm from "./OpportunityForm";
 
 class CreateOpportunity extends React.Component {
@@ -8,6 +10,11 @@ class CreateOpportunity extends React.Component {
   changeModalState = (val) => {
     this.setState({ open: val });
   };
+
+  onSubmit = (formValues) => {
+    this.props.createOpportunity(formValues);
+  };
+
   render() {
     return (
       <Modal
@@ -23,7 +30,10 @@ class CreateOpportunity extends React.Component {
         <Modal.Header>Create An Opportunity</Modal.Header>
         <Modal.Content>
           <div>
-            <OpportunityForm closeModal={this.changeModalState} />
+            <OpportunityForm
+              closeModal={this.changeModalState}
+              onSubmit={this.onSubmit}
+            />
           </div>
         </Modal.Content>
         <Modal.Actions>
@@ -44,4 +54,4 @@ class CreateOpportunity extends React.Component {
   }
 }
 
-export default CreateOpportunity;
+export default connect(null, { createOpportunity })(CreateOpportunity);

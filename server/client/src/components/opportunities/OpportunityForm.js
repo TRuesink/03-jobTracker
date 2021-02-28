@@ -1,8 +1,6 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-import { connect } from "react-redux";
-import { createOpportunity } from "../../actions";
-import { Dropdown, Form } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 
 const stageOptions = [
   {
@@ -120,12 +118,11 @@ const industryOptions = [
 
 class OpportunityForm extends React.Component {
   onFormSubmit = (formValues) => {
-    this.props.createOpportunity(formValues);
+    this.props.onSubmit(formValues);
     this.props.closeModal(false);
   };
 
   renderDropdown({ input, options }) {
-    console.log(input);
     return (
       <Form.Select
         {...input}
@@ -191,8 +188,6 @@ class OpportunityForm extends React.Component {
   }
 }
 
-OpportunityForm = reduxForm({
+export default reduxForm({
   form: "opportunityForm",
 })(OpportunityForm);
-
-export default connect(null, { createOpportunity })(OpportunityForm);

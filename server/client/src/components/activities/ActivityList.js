@@ -15,7 +15,7 @@ class ActivityList extends React.Component {
       return (
         <tr>
           <td style={{ paddingLeft: "0.7em" }}>{act.opportunity.name}</td>
-          <td>{act.contact ? act.contact.name : "no contact"}</td>
+          <td>{act.contact ? act.contact.name : ""}</td>
           <td>{act.description}</td>
           <td>
             {Math.floor(

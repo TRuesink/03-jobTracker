@@ -62,7 +62,14 @@ exports.createActivity = asyncHandler(async (req, res, next) => {
     await contact.save();
   }
 
-  const newActivity = await Activity.create(req.body);
+  let newActivity = await Activity.create(req.body);
+
+  newActivity = await newActivity
+    .populate([
+      { path: "opportunity", select: "name" },
+      { path: "contact", select: "name" },
+    ])
+    .execPopulate();
 
   res.status(201).json({
     success: true,
@@ -74,7 +81,10 @@ exports.createActivity = asyncHandler(async (req, res, next) => {
 // @route GET /api/v1/activities/:id
 // @access PRIVATE
 exports.getActivity = asyncHandler(async (req, res, next) => {
-  const activity = await Activity.findById(req.params.id);
+  const activity = await Activity.findById(req.params.id).populate([
+    { path: "opportunity", select: "name" },
+    { path: "contact", select: "name" },
+  ]);
 
   if (!activity) {
     return next(
@@ -111,7 +121,10 @@ exports.editActivity = asyncHandler(async (req, res, next) => {
   activity = await Activity.findByIdAndUpdate(req.params.id, req.body, {
     runValidators: true,
     new: true,
-  });
+  }).populate([
+    { path: "opportunity", select: "name" },
+    { path: "contact", select: "name" },
+  ]);
 
   res.status(200).json({
     success: true,

@@ -79,7 +79,6 @@ class OpportunityList extends React.Component {
         const lastActivity = opp.activities.sort(
           (a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt)
         )[0];
-        console.log(lastActivity);
         return (
           <tr key={opp._id} className={colorClass + " " + statusClass}>
             <td style={{ paddingLeft: "0.7em" }}>

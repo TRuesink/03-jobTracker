@@ -1,10 +1,20 @@
 import React from "react";
 import { Button, Header, Image, Modal } from "semantic-ui-react";
+import { connect } from "react-redux";
+import { createActivity } from "../../actions";
+import ActivityForm from "./ActivityForm";
+import _ from "lodash";
 
 class CreateActivity extends React.Component {
   state = { open: false };
   changeModalState = (val) => {
     this.setState({ open: val });
+  };
+  onSubmit = (formValues) => {
+    this.props.createActivity(
+      formValues.opportunity,
+      _.omit(formValues, "opportunity")
+    );
   };
   render() {
     return (
@@ -20,7 +30,12 @@ class CreateActivity extends React.Component {
       >
         <Modal.Header>Create An Activity</Modal.Header>
         <Modal.Content>
-          <div></div>
+          <div>
+            <ActivityForm
+              closeModal={this.changeModalState}
+              onSubmit={this.onSubmit}
+            />
+          </div>
         </Modal.Content>
         <Modal.Actions>
           <Button color="red" onClick={() => this.changeModalState(false)}>
@@ -40,4 +55,4 @@ class CreateActivity extends React.Component {
   }
 }
 
-export default CreateActivity;
+export default connect(null, { createActivity })(CreateActivity);
