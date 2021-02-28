@@ -4,6 +4,7 @@ import {
   AUTH_ERROR,
   AUTH_IN_PROGRESS,
   CREATE_ACTIVITY,
+  CREATE_CONTACT,
   CREATE_OPPORTUNITY,
   EDIT_OPPORTUNITY,
   ERROR,
@@ -142,6 +143,21 @@ export const fetchContacts = () => {
       dispatch({ type: IN_PROGRESS_CONTACT });
       const response = await axios.get("/api/v1/contacts");
       dispatch({ type: FETCH_CONTACTS, payload: response.data });
+    } catch (error) {
+      dispatch({ type: ERROR_CONTACT });
+    }
+  };
+};
+
+export const createContact = (oppId, formValues) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: IN_PROGRESS_CONTACT });
+      const response = await axios.post(
+        `/api/v1/opportunities/${oppId}/contacts`,
+        formValues
+      );
+      dispatch({ type: CREATE_CONTACT, payload: response.data });
     } catch (error) {
       dispatch({ type: ERROR_CONTACT });
     }

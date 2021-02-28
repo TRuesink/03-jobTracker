@@ -3,6 +3,7 @@ const router = express.Router();
 const noteRouter = require("./noteRouter");
 const contactRouter = require("./contactRouter");
 const activityRouter = require("./activityRouter");
+const meetingRouter = require("./meetingRouter");
 
 const {
   getOpportunities,
@@ -23,6 +24,7 @@ const advancedResults = require("../middlewares/advancedResults");
 router.use("/:oppId/notes", noteRouter);
 router.use("/:oppId/contacts", contactRouter);
 router.use("/:oppId/activities", activityRouter);
+router.use("/:oppId/meetings", meetingRouter);
 
 //routes
 router

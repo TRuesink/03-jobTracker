@@ -19,7 +19,16 @@ const advancedResults = require("../middlewares/advancedResults");
 
 router
   .route("/")
-  .get(protect, advancedResults(Meeting, true), getMeetings)
+  .get(
+    protect,
+    advancedResults(
+      Meeting,
+      true,
+      { path: "contact", select: "name" },
+      { path: "opportunity", select: "name" }
+    ),
+    getMeetings
+  )
   .post(protect, createMeeting);
 
 router

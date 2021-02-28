@@ -10,6 +10,8 @@ import { connect } from "react-redux";
 import { getMe } from "../actions";
 import OpportunityDetail from "./opportunities/OpportunityDetail";
 import ActivityList from "./activities/ActivityList";
+import ContactList from "./contacts/ContactList";
+import MeetingList from "./meetings/MeetingList";
 
 class App extends React.Component {
   componentDidMount() {
@@ -38,6 +40,8 @@ class App extends React.Component {
                   component={OpportunityList}
                 />
                 <Route path="/activities" exact component={ActivityList} />
+                <Route path="/contacts" exact component={ContactList} />
+                <Route path="/meetings" exact component={MeetingList} />
               </Switch>
             </div>
           </div>

@@ -11,7 +11,7 @@ exports.getContacts = asyncHandler(async (req, res, next) => {
     const contacts = await Contact.find({
       opportunity: req.params.oppId,
       user: req.user.id,
-    });
+    }).populate({ path: "opportunity", select: "name" });
     res.status(200).json({
       success: true,
       count: contacts.length,
@@ -45,7 +45,11 @@ exports.createContact = asyncHandler(async (req, res, next) => {
     );
   }
 
-  const newContact = await Contact.create(req.body);
+  let newContact = await Contact.create(req.body);
+
+  newContact = await newContact
+    .populate({ path: "opportunity", select: "name" })
+    .execPopulate();
 
   res.status(201).json({
     success: true,

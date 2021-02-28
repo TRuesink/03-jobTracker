@@ -6,6 +6,11 @@ const meetingSchema = new Schema({
   topic: { type: String, required: true },
   meetingDate: { type: Date, required: false },
   notes: { type: String, required: false },
+  opportunity: {
+    type: mongoose.Schema.ObjectId,
+    ref: "Opportunity",
+    required: false,
+  },
   contact: {
     type: mongoose.Schema.ObjectId,
     ref: "Contact",
