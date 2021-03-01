@@ -42,7 +42,7 @@ class CreateMeeting extends React.Component {
             Cancel
           </Button>
           <Button
-            form="oppForm"
+            form="meetingForm"
             content="Submit"
             labelPosition="right"
             icon="checkmark"

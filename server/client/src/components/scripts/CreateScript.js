@@ -1,20 +1,17 @@
 import React from "react";
 import { Button, Header, Image, Modal } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { createActivity } from "../../actions";
-import ActivityForm from "./ActivityForm";
+import { createScript } from "../../actions";
+import ScriptForm from "./ScriptForm";
 import _ from "lodash";
 
-class CreateActivity extends React.Component {
+class CreateScript extends React.Component {
   state = { open: false };
   changeModalState = (val) => {
     this.setState({ open: val });
   };
   onSubmit = (formValues) => {
-    this.props.createActivity(
-      formValues.opportunity,
-      _.omit(formValues, "opportunity")
-    );
+    this.props.createScript(formValues);
   };
   render() {
     return (
@@ -28,10 +25,10 @@ class CreateActivity extends React.Component {
           </Button>
         }
       >
-        <Modal.Header>Create An Activity</Modal.Header>
+        <Modal.Header>Create A Note</Modal.Header>
         <Modal.Content>
           <div>
-            <ActivityForm
+            <ScriptForm
               closeModal={this.changeModalState}
               onSubmit={this.onSubmit}
             />
@@ -42,7 +39,7 @@ class CreateActivity extends React.Component {
             Cancel
           </Button>
           <Button
-            form="activityForm"
+            form="scriptForm"
             content="Submit"
             labelPosition="right"
             icon="checkmark"
@@ -55,4 +52,4 @@ class CreateActivity extends React.Component {
   }
 }
 
-export default connect(null, { createActivity })(CreateActivity);
+export default connect(null, { createScript })(CreateScript);

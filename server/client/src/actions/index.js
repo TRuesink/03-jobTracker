@@ -8,6 +8,7 @@ import {
   CREATE_MEETING,
   CREATE_NOTE,
   CREATE_OPPORTUNITY,
+  CREATE_SCRIPT,
   EDIT_OPPORTUNITY,
   ERROR,
   ERROR_ACTIVITY,
@@ -15,18 +16,21 @@ import {
   ERROR_MEETING,
   ERROR_NOTE,
   ERROR_OPPORTUNITY,
+  ERROR_SCRIPT,
   FETCH_ACTIVITIES,
   FETCH_CONTACTS,
   FETCH_MEETINGS,
   FETCH_NOTES,
   FETCH_OPPORTUNITIES,
   FETCH_OPPORTUNITY,
+  FETCH_SCRIPTS,
   GET_ME,
   IN_PROGRESS_ACTIVITY,
   IN_PROGRESS_CONTACT,
   IN_PROGRESS_MEETING,
   IN_PROGRESS_NOTE,
   IN_PROGRESS_OPPORTUNITY,
+  IN_PROGRESS_SCRIPT,
   SIGN_OUT,
 } from "./types";
 
@@ -223,6 +227,32 @@ export const createNote = (oppId, formValues) => {
       dispatch({ type: CREATE_NOTE, payload: response.data });
     } catch (error) {
       dispatch({ type: ERROR_NOTE });
+    }
+  };
+};
+
+// ---------------- Script Action Creators ------------------- //
+
+export const fetchScripts = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: IN_PROGRESS_SCRIPT });
+      const response = await axios.get("/api/v1/scripts");
+      dispatch({ type: FETCH_SCRIPTS, payload: response.data });
+    } catch (error) {
+      dispatch({ type: ERROR_SCRIPT });
+    }
+  };
+};
+
+export const createScript = (formValues) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: IN_PROGRESS_SCRIPT });
+      const response = await axios.post("/api/v1/scripts", formValues);
+      dispatch({ type: CREATE_SCRIPT, payload: response.data });
+    } catch (error) {
+      dispatch({ type: ERROR_SCRIPT });
     }
   };
 };

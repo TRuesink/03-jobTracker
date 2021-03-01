@@ -13,6 +13,7 @@ import ActivityList from "./activities/ActivityList";
 import ContactList from "./contacts/ContactList";
 import MeetingList from "./meetings/MeetingList";
 import NoteList from "./notes/NoteList";
+import ScriptList from "./scripts/ScriptList";
 
 class App extends React.Component {
   componentDidMount() {
@@ -44,6 +45,7 @@ class App extends React.Component {
                 <Route path="/contacts" exact component={ContactList} />
                 <Route path="/meetings" exact component={MeetingList} />
                 <Route path="/notes" exact component={NoteList} />
+                <Route path="/scripts" exact component={ScriptList} />
               </Switch>
             </div>
           </div>

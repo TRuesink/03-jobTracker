@@ -67,7 +67,7 @@ class ContactForm extends React.Component {
   render() {
     return (
       <form
-        id="oppForm"
+        id="contactForm"
         onSubmit={this.props.handleSubmit(this.onFormSubmit)}
         className="ui form"
       >

@@ -37,7 +37,7 @@ class ActivityForm extends React.Component {
   render() {
     return (
       <form
-        id="oppForm"
+        id="activityForm"
         onSubmit={this.props.handleSubmit(this.onFormSubmit)}
         className="ui form"
       >

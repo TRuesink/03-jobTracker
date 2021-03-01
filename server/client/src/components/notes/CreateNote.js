@@ -42,7 +42,7 @@ class CreateNote extends React.Component {
             Cancel
           </Button>
           <Button
-            form="oppForm"
+            form="noteForm"
             content="Submit"
             labelPosition="right"
             icon="checkmark"

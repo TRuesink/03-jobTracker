@@ -10,7 +10,11 @@ const scriptSchema = new Schema({
     required: true,
   },
   purpose: { type: String, required: true },
-  mode: { type: String, enum: ["email", "linkedIn"], default: "linkedIn" },
+  mode: {
+    type: String,
+    enum: ["email", "linkedIn", "other"],
+    default: "linkedIn",
+  },
   user: {
     type: mongoose.Schema.ObjectId,
     ref: "User",

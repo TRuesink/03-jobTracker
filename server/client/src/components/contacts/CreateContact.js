@@ -42,7 +42,7 @@ class CreateContact extends React.Component {
             Cancel
           </Button>
           <Button
-            form="oppForm"
+            form="contactForm"
             content="Submit"
             labelPosition="right"
             icon="checkmark"

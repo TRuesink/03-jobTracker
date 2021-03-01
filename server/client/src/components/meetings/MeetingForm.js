@@ -45,7 +45,7 @@ class MeetingForm extends React.Component {
   render() {
     return (
       <form
-        id="oppForm"
+        id="meetingForm"
         onSubmit={this.props.handleSubmit(this.onFormSubmit)}
         className="ui form"
       >

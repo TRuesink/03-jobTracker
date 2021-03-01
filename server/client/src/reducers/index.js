@@ -7,6 +7,7 @@ import errorReducer from "./errorReducer";
 import meetingReducer from "./meetingReducer";
 import noteReducer from "./noteReducer";
 import opportunityReducer from "./opportunityReducer";
+import scriptReducer from "./ScriptReducer";
 
 export default combineReducers({
   form: formReducer,
@@ -17,4 +18,5 @@ export default combineReducers({
   contacts: contactReducer,
   meetings: meetingReducer,
   notes: noteReducer,
+  scripts: scriptReducer,
 });
