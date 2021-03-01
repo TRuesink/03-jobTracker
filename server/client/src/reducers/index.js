@@ -5,6 +5,7 @@ import authReducer from "./authReducer";
 import contactReducer from "./contactReducer";
 import errorReducer from "./errorReducer";
 import meetingReducer from "./meetingReducer";
+import noteReducer from "./noteReducer";
 import opportunityReducer from "./opportunityReducer";
 
 export default combineReducers({
@@ -15,4 +16,5 @@ export default combineReducers({
   activities: activityReducer,
   contacts: contactReducer,
   meetings: meetingReducer,
+  notes: noteReducer,
 });

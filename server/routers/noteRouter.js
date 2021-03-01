@@ -19,7 +19,11 @@ const advancedResults = require("../middlewares/advancedResults");
 
 router
   .route("/")
-  .get(protect, advancedResults(Note, true), getNotes)
+  .get(
+    protect,
+    advancedResults(Note, true, { path: "opportunity", select: "name" }),
+    getNotes
+  )
   .post(protect, createNote);
 
 router

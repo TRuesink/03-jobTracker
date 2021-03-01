@@ -6,22 +6,26 @@ import {
   CREATE_ACTIVITY,
   CREATE_CONTACT,
   CREATE_MEETING,
+  CREATE_NOTE,
   CREATE_OPPORTUNITY,
   EDIT_OPPORTUNITY,
   ERROR,
   ERROR_ACTIVITY,
   ERROR_CONTACT,
   ERROR_MEETING,
+  ERROR_NOTE,
   ERROR_OPPORTUNITY,
   FETCH_ACTIVITIES,
   FETCH_CONTACTS,
   FETCH_MEETINGS,
+  FETCH_NOTES,
   FETCH_OPPORTUNITIES,
   FETCH_OPPORTUNITY,
   GET_ME,
   IN_PROGRESS_ACTIVITY,
   IN_PROGRESS_CONTACT,
   IN_PROGRESS_MEETING,
+  IN_PROGRESS_NOTE,
   IN_PROGRESS_OPPORTUNITY,
   SIGN_OUT,
 } from "./types";
@@ -190,6 +194,35 @@ export const createMeeting = (oppId, formValues) => {
       dispatch({ type: CREATE_MEETING, payload: response.data });
     } catch (error) {
       dispatch({ type: ERROR_MEETING });
+    }
+  };
+};
+
+// ---------------- Note Action Creators ------------------- //
+
+export const fetchNotes = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: IN_PROGRESS_NOTE });
+      const response = await axios.get("/api/v1/notes");
+      dispatch({ type: FETCH_NOTES, payload: response.data });
+    } catch (error) {
+      dispatch({ type: ERROR_NOTE });
+    }
+  };
+};
+
+export const createNote = (oppId, formValues) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: IN_PROGRESS_NOTE });
+      const response = await axios.post(
+        `/api/v1/opportunities/${oppId}/notes`,
+        formValues
+      );
+      dispatch({ type: CREATE_NOTE, payload: response.data });
+    } catch (error) {
+      dispatch({ type: ERROR_NOTE });
     }
   };
 };

@@ -12,6 +12,7 @@ import OpportunityDetail from "./opportunities/OpportunityDetail";
 import ActivityList from "./activities/ActivityList";
 import ContactList from "./contacts/ContactList";
 import MeetingList from "./meetings/MeetingList";
+import NoteList from "./notes/NoteList";
 
 class App extends React.Component {
   componentDidMount() {
@@ -42,6 +43,7 @@ class App extends React.Component {
                 <Route path="/activities" exact component={ActivityList} />
                 <Route path="/contacts" exact component={ContactList} />
                 <Route path="/meetings" exact component={MeetingList} />
+                <Route path="/notes" exact component={NoteList} />
               </Switch>
             </div>
           </div>

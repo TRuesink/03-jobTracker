@@ -11,7 +11,7 @@ exports.getNotes = asyncHandler(async (req, res, next) => {
     const notes = await Note.find({
       opportunity: req.params.oppId,
       user: req.user.id,
-    });
+    }).populate({ path: "opportunity", select: "name" });
     res.status(200).json({
       success: true,
       count: notes.length,
@@ -46,6 +46,10 @@ exports.createNote = asyncHandler(async (req, res, next) => {
 
   let newNote = await Note.create(req.body);
 
+  newNote = await newNote
+    .populate({ path: "opportunity", select: "name" })
+    .execPopulate();
+
   res.status(201).json({
     success: true,
     data: newNote,
@@ -56,7 +60,10 @@ exports.createNote = asyncHandler(async (req, res, next) => {
 // @route GET /api/v1/notes/:id
 // @access PRIVATE
 exports.getNote = asyncHandler(async (req, res, next) => {
-  const note = await Note.findById(req.params.id);
+  const note = await Note.findById(req.params.id).populate({
+    path: "opportunity",
+    select: "name",
+  });
 
   if (!note) {
     return next(
@@ -92,7 +99,7 @@ exports.editNote = asyncHandler(async (req, res, next) => {
   note = await Note.findByIdAndUpdate(req.params.id, req.body, {
     runValidators: true,
     new: true,
-  });
+  }).populate({ path: "opportunity", select: "name" });
   res.status(200).json({
     success: true,
     data: note,
