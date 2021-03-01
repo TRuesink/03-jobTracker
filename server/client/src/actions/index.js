@@ -5,6 +5,7 @@ import {
   AUTH_IN_PROGRESS,
   CREATE_ACTIVITY,
   CREATE_CONTACT,
+  CREATE_MEETING,
   CREATE_OPPORTUNITY,
   EDIT_OPPORTUNITY,
   ERROR,
@@ -172,6 +173,21 @@ export const fetchMeetings = () => {
       dispatch({ type: IN_PROGRESS_MEETING });
       const response = await axios.get("/api/v1/meetings");
       dispatch({ type: FETCH_MEETINGS, payload: response.data });
+    } catch (error) {
+      dispatch({ type: ERROR_MEETING });
+    }
+  };
+};
+
+export const createMeeting = (oppId, formValues) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: IN_PROGRESS_MEETING });
+      const response = await axios.post(
+        `/api/v1/opportunities/${oppId}/meetings`,
+        formValues
+      );
+      dispatch({ type: CREATE_MEETING, payload: response.data });
     } catch (error) {
       dispatch({ type: ERROR_MEETING });
     }

@@ -15,6 +15,11 @@ class MeetingList extends React.Component {
       return (
         <tr>
           <td style={{ paddingLeft: "0.7em" }}>{meeting.topic}</td>
+          <td>
+            {meeting.meetingDate
+              ? new Date(meeting.meetingDate).toLocaleDateString()
+              : ""}
+          </td>
           <td>{meeting.opportunity ? meeting.opportunity.name : ""}</td>
           <td>{meeting.contact ? meeting.contact.name : ""}</td>
           <td>{meeting.notes}</td>
@@ -38,7 +43,7 @@ class MeetingList extends React.Component {
           className="ui secondary segment"
         >
           <h3 style={{ marginBottom: "0" }}>Meetings</h3>
-          {/* <CreateContact /> */}
+          <CreateMeeting />
         </div>
 
         <div
@@ -54,9 +59,10 @@ class MeetingList extends React.Component {
                 <th style={{ paddingLeft: "0.7em" }} className="three wide">
                   Topic
                 </th>
+                <th className="two wide">Date</th>
                 <th className="three wide">Opportunity</th>
-                <th className="three wide">Contact</th>
-                <th className="seven wide">Notes</th>
+                <th className="two wide">Contact</th>
+                <th className="six wide">Notes</th>
               </tr>
             </thead>
             <tbody>{this.renderMeetings()}</tbody>

@@ -27,6 +27,11 @@ const meetingReducer = (state = INIT_STATE, action) => {
         data: { ...state.data, ..._.mapKeys(action.payload.data, "_id") },
         inProgress: false,
       };
+    case CREATE_MEETING:
+      return {
+        data: { ...state.data, [action.payload.data._id]: action.payload.data },
+        inProgress: false,
+      };
     case ERROR_MEETING:
       return {
         data: { ...state.data },

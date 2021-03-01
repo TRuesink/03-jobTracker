@@ -11,21 +11,25 @@ class ActivityList extends React.Component {
   }
 
   renderActivities() {
-    return this.props.activities.map((act) => {
-      return (
-        <tr>
-          <td style={{ paddingLeft: "0.7em" }}>{act.opportunity.name}</td>
-          <td>{act.contact ? act.contact.name : ""}</td>
-          <td>{act.description}</td>
-          <td>
-            {Math.floor(
-              (new Date() - Date.parse(act.createdAt)) / (1000 * 60 * 60 * 24)
-            )}{" "}
-            days ago
-          </td>
-        </tr>
-      );
-    });
+    return this.props.activities
+      .sort((a, b) => {
+        return Date.parse(b.createdAt) - Date.parse(a.createdAt);
+      })
+      .map((act) => {
+        return (
+          <tr>
+            <td style={{ paddingLeft: "0.7em" }}>{act.opportunity.name}</td>
+            <td>{act.contact ? act.contact.name : ""}</td>
+            <td>{act.description}</td>
+            <td>
+              {Math.floor(
+                (new Date() - Date.parse(act.createdAt)) / (1000 * 60 * 60 * 24)
+              )}{" "}
+              days ago
+            </td>
+          </tr>
+        );
+      });
   }
 
   render() {
