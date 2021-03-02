@@ -18,7 +18,7 @@ exports.createScript = asyncHandler(async (req, res, next) => {
   let newScript = await Script.create(req.body);
 
   newScript = await newScript
-    .populate({ path: "user", select: "name" })
+    .populate({ path: "activities", select: "description" })
     .execPopulate();
 
   res.status(201).json({ success: true, data: newScript });
@@ -29,8 +29,8 @@ exports.createScript = asyncHandler(async (req, res, next) => {
 // @access PRIVATE
 exports.getScript = asyncHandler(async (req, res, next) => {
   let script = await Script.findById(req.params.id).populate({
-    path: "user",
-    select: "name",
+    path: "activities",
+    select: "description",
   });
 
   if (!script) {
@@ -70,7 +70,7 @@ exports.editScript = asyncHandler(async (req, res, next) => {
   script = await Script.findByIdAndUpdate(req.params.id, req.body, {
     runValidators: true,
     new: true,
-  }).populate({ path: "user", select: "name" });
+  }).populate({ path: "activities", select: "description" });
   res.status(200).json({ success: true, data: script });
 });
 

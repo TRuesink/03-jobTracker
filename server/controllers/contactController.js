@@ -11,7 +11,10 @@ exports.getContacts = asyncHandler(async (req, res, next) => {
     const contacts = await Contact.find({
       opportunity: req.params.oppId,
       user: req.user.id,
-    }).populate({ path: "opportunity", select: "name" });
+    }).populate([
+      { path: "opportunity", select: "name" },
+      { path: "activities", select: "description" },
+    ]);
     res.status(200).json({
       success: true,
       count: contacts.length,
@@ -48,7 +51,10 @@ exports.createContact = asyncHandler(async (req, res, next) => {
   let newContact = await Contact.create(req.body);
 
   newContact = await newContact
-    .populate({ path: "opportunity", select: "name" })
+    .populate([
+      { path: "opportunity", select: "name" },
+      { path: "activities", select: "description" },
+    ])
     .execPopulate();
 
   res.status(201).json({
@@ -61,7 +67,10 @@ exports.createContact = asyncHandler(async (req, res, next) => {
 // @route GET /api/v1/contacts/:id
 // @access PRIVATE
 exports.getContact = asyncHandler(async (req, res, next) => {
-  const contact = await Contact.findById(req.params.id);
+  const contact = await Contact.findById(req.params.id).populate([
+    { path: "opportunity", select: "name" },
+    { path: "activities", select: "description" },
+  ]);
 
   if (!contact) {
     return next(
@@ -98,7 +107,10 @@ exports.editContact = asyncHandler(async (req, res, next) => {
   contact = await Contact.findByIdAndUpdate(req.params.id, req.body, {
     runValidators: true,
     new: true,
-  });
+  }).populate([
+    { path: "opportunity", select: "name" },
+    { path: "activities", select: "description" },
+  ]);
 
   res.status(200).json({
     success: true,

@@ -26,7 +26,12 @@ router
   .route("/")
   .get(
     protect,
-    advancedResults(Contact, true, { path: "opportunity", select: "name" }),
+    advancedResults(
+      Contact,
+      true,
+      { path: "opportunity", select: "name" },
+      { path: "activities", select: "description" }
+    ),
     getContacts
   )
   .post(protect, createContact);

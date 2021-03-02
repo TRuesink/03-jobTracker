@@ -19,6 +19,11 @@ const activitySchema = new Schema({
     ref: "User",
     required: true,
   },
+  script: {
+    type: mongoose.Schema.ObjectId,
+    ref: "Script",
+    required: false,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

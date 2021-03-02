@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import {
   fetchContacts,
   fetchOpportunities,
+  fetchScripts,
   createActivity,
 } from "../../actions";
 import { Dropdown, Form } from "semantic-ui-react";
@@ -12,6 +13,7 @@ class ActivityForm extends React.Component {
   componentDidMount() {
     this.props.fetchContacts();
     this.props.fetchOpportunities();
+    this.props.fetchScripts();
   }
 
   onFormSubmit = (formValues) => {
@@ -21,7 +23,11 @@ class ActivityForm extends React.Component {
 
   renderDropdown({ input, options, disabled }) {
     const optionsArray = options.map((opt) => {
-      return { key: opt._id, text: opt.name, value: opt._id };
+      return {
+        key: opt._id || opt.purpose,
+        text: opt.name || opt.purpose,
+        value: opt._id,
+      };
     });
     return (
       <Form.Select
@@ -64,6 +70,18 @@ class ActivityForm extends React.Component {
           )}
         </div>
         <div className="field">
+          <label>Script (if applicable)</label>
+          {this.props.scripts.length === 0 ? (
+            <div>No Scripts</div>
+          ) : (
+            <Field
+              name="script"
+              component={this.renderDropdown}
+              options={this.props.scripts}
+            />
+          )}
+        </div>
+        <div className="field">
           <label>What you did</label>
           <Field name="description" component="textarea" rows="3" />
         </div>
@@ -80,6 +98,7 @@ const mapStateToProps = (state) => {
   return {
     contacts: Object.values(state.contacts.data),
     opportunities: Object.values(state.opportunities.data),
+    scripts: Object.values(state.scripts.data),
   };
 };
 
@@ -87,4 +106,5 @@ export default connect(mapStateToProps, {
   fetchContacts,
   fetchOpportunities,
   createActivity,
+  fetchScripts,
 })(ActivityForm);

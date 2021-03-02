@@ -21,7 +21,10 @@ router
   .route("/")
   .get(
     protect,
-    advancedResults(Script, true, { path: "user", select: "name" }),
+    advancedResults(Script, true, {
+      path: "activities",
+      select: "description",
+    }),
     getScripts
   )
   .post(protect, createScript);
