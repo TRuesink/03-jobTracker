@@ -7,11 +7,23 @@ import CreateContact from "./CreateContact";
 
 class ContactList extends React.Component {
   componentDidMount() {
-    this.props.fetchContacts();
+    if (this.props.oppId) {
+      this.props.fetchContacts(this.props.oppId);
+    } else {
+      this.props.fetchContacts();
+    }
   }
 
   renderContacts() {
-    return this.props.contacts.map((contact) => {
+    let contactList;
+    if (this.props.oppId) {
+      contactList = this.props.contacts.filter(
+        (contact) => contact.opportunity._id === this.props.oppId
+      );
+    } else {
+      contactList = this.props.contacts;
+    }
+    return contactList.map((contact) => {
       return (
         <tr>
           <td style={{ paddingLeft: "0.7em" }}>{contact.name}</td>
@@ -39,7 +51,7 @@ class ContactList extends React.Component {
           className="ui secondary segment"
         >
           <h3 style={{ marginBottom: "0" }}>Contacts</h3>
-          <CreateContact />
+          <CreateContact oppId={this.props.oppId} />
         </div>
 
         <div

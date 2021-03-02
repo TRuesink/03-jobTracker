@@ -117,11 +117,16 @@ export const createOpportunity = (formValues) => {
 
 // ---------------- Activity Action Creators ------------------- //
 
-export const fetchActivities = () => {
+export const fetchActivities = (oppId) => {
   return async (dispatch) => {
     try {
       dispatch({ type: IN_PROGRESS_ACTIVITY });
-      const response = await axios.get("/api/v1/activities");
+      let response;
+      if (oppId) {
+        response = await axios.get(`/api/v1/opportunities/${oppId}/activities`);
+      } else {
+        response = await axios.get("/api/v1/activities");
+      }
       dispatch({ type: FETCH_ACTIVITIES, payload: response.data });
     } catch (error) {
       dispatch({ type: ERROR_ACTIVITY });
@@ -146,11 +151,16 @@ export const createActivity = (oppId, formValues) => {
 
 // ---------------- Contact Action Creators ------------------- //
 
-export const fetchContacts = () => {
+export const fetchContacts = (oppId) => {
   return async (dispatch) => {
     try {
       dispatch({ type: IN_PROGRESS_CONTACT });
-      const response = await axios.get("/api/v1/contacts");
+      let response;
+      if (oppId) {
+        response = await axios.get(`/api/v1/opportunities/${oppId}/contacts`);
+      } else {
+        response = await axios.get(`/api/v1/contacts`);
+      }
       dispatch({ type: FETCH_CONTACTS, payload: response.data });
     } catch (error) {
       dispatch({ type: ERROR_CONTACT });
@@ -175,11 +185,17 @@ export const createContact = (oppId, formValues) => {
 
 // ---------------- Meeting Action Creators ------------------- //
 
-export const fetchMeetings = () => {
+export const fetchMeetings = (oppId) => {
   return async (dispatch) => {
     try {
       dispatch({ type: IN_PROGRESS_MEETING });
-      const response = await axios.get("/api/v1/meetings");
+      let response;
+      if (oppId) {
+        response = await axios.get(`/api/v1/opportunities/${oppId}/meetings`);
+      } else {
+        response = await axios.get("/api/v1/meetings");
+      }
+
       dispatch({ type: FETCH_MEETINGS, payload: response.data });
     } catch (error) {
       dispatch({ type: ERROR_MEETING });
@@ -204,11 +220,16 @@ export const createMeeting = (oppId, formValues) => {
 
 // ---------------- Note Action Creators ------------------- //
 
-export const fetchNotes = () => {
+export const fetchNotes = (oppId) => {
   return async (dispatch) => {
     try {
       dispatch({ type: IN_PROGRESS_NOTE });
-      const response = await axios.get("/api/v1/notes");
+      let response;
+      if (oppId) {
+        response = await axios.get(`/api/v1/opportunities/${oppId}/notes`);
+      } else {
+        response = await axios.get("/api/v1/notes");
+      }
       dispatch({ type: FETCH_NOTES, payload: response.data });
     } catch (error) {
       dispatch({ type: ERROR_NOTE });

@@ -7,11 +7,23 @@ import CreateNote from "./CreateNote";
 
 class NoteList extends React.Component {
   componentDidMount() {
-    this.props.fetchNotes();
+    if (this.props.oppId) {
+      this.props.fetchNotes(this.props.oppId);
+    } else {
+      this.props.fetchNotes();
+    }
   }
 
   renderNotes() {
-    return this.props.notes.map((note) => {
+    let noteList;
+    if (this.props.oppId) {
+      noteList = this.props.notes.filter(
+        (note) => note.opportunity._id === this.props.oppId
+      );
+    } else {
+      noteList = this.props.notes;
+    }
+    return noteList.map((note) => {
       return (
         <tr>
           <td style={{ paddingLeft: "0.7em" }}>{note.opportunity.name}</td>
@@ -37,7 +49,7 @@ class NoteList extends React.Component {
           className="ui secondary segment"
         >
           <h3 style={{ marginBottom: "0" }}>Notes</h3>
-          <CreateNote />
+          <CreateNote oppId={this.props.oppId} />
         </div>
 
         <div

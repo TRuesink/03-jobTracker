@@ -34,6 +34,9 @@ class CreateActivity extends React.Component {
             <ActivityForm
               closeModal={this.changeModalState}
               onSubmit={this.onSubmit}
+              initialValues={
+                this.props.oppId ? { opportunity: this.props.oppId } : null
+              }
             />
           </div>
         </Modal.Content>

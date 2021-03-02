@@ -34,6 +34,9 @@ class CreateContact extends React.Component {
             <ContactForm
               closeModal={this.changeModalState}
               onSubmit={this.onSubmit}
+              initialValues={
+                this.props.oppId ? { opportunity: this.props.oppId } : null
+              }
             />
           </div>
         </Modal.Content>

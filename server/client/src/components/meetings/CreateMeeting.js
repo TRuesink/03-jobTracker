@@ -34,6 +34,9 @@ class CreateMeeting extends React.Component {
             <MeetingForm
               closeModal={this.changeModalState}
               onSubmit={this.onSubmit}
+              initialValues={
+                this.props.oppId ? { opportunity: this.props.oppId } : null
+              }
             />
           </div>
         </Modal.Content>

@@ -7,11 +7,23 @@ import CreateMeeting from "./CreateMeeting";
 
 class MeetingList extends React.Component {
   componentDidMount() {
-    this.props.fetchMeetings();
+    if (this.props.oppId) {
+      this.props.fetchMeetings(this.props.oppId);
+    } else {
+      this.props.fetchMeetings();
+    }
   }
 
   renderMeetings() {
-    return this.props.meetings.map((meeting) => {
+    let meetingList;
+    if (this.props.oppId) {
+      meetingList = this.props.meetings.filter(
+        (meeting) => meeting.opportunity._id === this.props.oppId
+      );
+    } else {
+      meetingList = this.props.meetings;
+    }
+    return meetingList.map((meeting) => {
       return (
         <tr>
           <td style={{ paddingLeft: "0.7em" }}>{meeting.topic}</td>
@@ -43,7 +55,7 @@ class MeetingList extends React.Component {
           className="ui secondary segment"
         >
           <h3 style={{ marginBottom: "0" }}>Meetings</h3>
-          <CreateMeeting />
+          <CreateMeeting oppId={this.props.oppId} />
         </div>
 
         <div

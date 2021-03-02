@@ -3,6 +3,7 @@ import OpportunityPath from "./OpportunityPath";
 import { connect } from "react-redux";
 import { fetchOpportunity } from "../../actions";
 import OpportunityHeader from "./OpportunityHeader";
+import OpportunityRelated from "./OpportunityRelated";
 
 class OpportunityDetail extends React.Component {
   componentDidMount() {
@@ -13,6 +14,7 @@ class OpportunityDetail extends React.Component {
       <div>
         <OpportunityHeader opp={this.props.opportunity} />
         <OpportunityPath opp={this.props.opportunity} />
+        <OpportunityRelated oppId={this.props.match.params.id} />
       </div>
     );
   }

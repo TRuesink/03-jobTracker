@@ -15,7 +15,7 @@ class MeetingForm extends React.Component {
     this.props.closeModal(false);
   };
 
-  renderDropdown({ input, options }) {
+  renderDropdown({ input, options, disabled }) {
     const optionsArray = options.map((opt) => {
       return { key: opt._id, text: opt.name, value: opt._id };
     });
@@ -26,6 +26,7 @@ class MeetingForm extends React.Component {
         selection
         options={optionsArray}
         onChange={(e, { value }) => input.onChange(value)}
+        disabled={disabled}
       />
     );
   }
@@ -74,6 +75,7 @@ class MeetingForm extends React.Component {
               name="opportunity"
               component={this.renderDropdown}
               options={this.props.opportunities}
+              disabled={this.props.initialValues ? true : false}
             />
           )}
         </div>
