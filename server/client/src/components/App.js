@@ -14,6 +14,7 @@ import ContactList from "./contacts/ContactList";
 import MeetingList from "./meetings/MeetingList";
 import NoteList from "./notes/NoteList";
 import ScriptList from "./scripts/ScriptList";
+import requireAuth from "./requireAuth";
 
 class App extends React.Component {
   componentDidMount() {
@@ -26,26 +27,46 @@ class App extends React.Component {
           <Header />
           <div style={{ margin: "1rem" }} className="ui stackable grid">
             <div className="three wide column">
-              <SideMenu />
+              <Route path="/jobs" component={requireAuth(SideMenu)} />
             </div>
             <div className="thirteen wide column">
               <Switch>
-                <Route path="/home" exact component={Home} />
+                <Route path="/jobs/home" exact component={requireAuth(Home)} />
                 <Route
-                  path="/opportunities/:id"
+                  path="/jobs/opportunities/:id"
                   exact
-                  component={OpportunityDetail}
+                  component={requireAuth(OpportunityDetail)}
                 />
                 <Route
-                  path="/opportunities"
+                  path="/jobs/opportunities"
                   exact
-                  component={OpportunityList}
+                  component={requireAuth(OpportunityList)}
                 />
-                <Route path="/activities" exact component={ActivityList} />
-                <Route path="/contacts" exact component={ContactList} />
-                <Route path="/meetings" exact component={MeetingList} />
-                <Route path="/notes" exact component={NoteList} />
-                <Route path="/scripts" exact component={ScriptList} />
+                <Route
+                  path="/jobs/activities"
+                  exact
+                  component={requireAuth(ActivityList)}
+                />
+                <Route
+                  path="/jobs/contacts"
+                  exact
+                  component={requireAuth(ContactList)}
+                />
+                <Route
+                  path="/jobs/meetings"
+                  exact
+                  component={requireAuth(MeetingList)}
+                />
+                <Route
+                  path="/jobs/notes"
+                  exact
+                  component={requireAuth(NoteList)}
+                />
+                <Route
+                  path="/jobs/scripts"
+                  exact
+                  component={requireAuth(ScriptList)}
+                />
               </Switch>
             </div>
           </div>

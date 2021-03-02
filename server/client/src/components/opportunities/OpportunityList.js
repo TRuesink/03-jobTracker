@@ -82,7 +82,7 @@ class OpportunityList extends React.Component {
         return (
           <tr key={opp._id} className={colorClass + " " + statusClass}>
             <td style={{ paddingLeft: "0.7em" }}>
-              <Link to={`/opportunities/${opp._id}`}>{opp.name}</Link>
+              <Link to={`/jobs/opportunities/${opp._id}`}>{opp.name}</Link>
             </td>
             <td>
               <Form.Select

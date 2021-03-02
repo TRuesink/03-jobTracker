@@ -5,25 +5,25 @@ class SideMenu extends React.Component {
   render() {
     return (
       <div className="ui left fluid vertical menu">
-        <NavLink to="/home" className="item">
+        <NavLink to="/jobs/home" className="item">
           Home
         </NavLink>
-        <NavLink to="/opportunities" className="item">
+        <NavLink to="/jobs/opportunities" className="item">
           Opportunities
         </NavLink>
-        <NavLink to="/activities" className="item">
+        <NavLink to="/jobs/activities" className="item">
           Activities
         </NavLink>
-        <NavLink to="/contacts" className="item">
+        <NavLink to="/jobs/contacts" className="item">
           Contacts
         </NavLink>
-        <NavLink to="/meetings" className="item">
+        <NavLink to="/jobs/meetings" className="item">
           Meetings
         </NavLink>
-        <NavLink to="/scripts" className="item">
+        <NavLink to="/jobs/scripts" className="item">
           Scripts
         </NavLink>
-        <NavLink to="/notes" className="item">
+        <NavLink to="/jobs/notes" className="item">
           Notes
         </NavLink>
       </div>

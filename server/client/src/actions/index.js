@@ -45,7 +45,8 @@ export const getMe = () => {
       const response = await axios.get("/api/v1/auth/me");
       dispatch({ type: GET_ME, payload: response.data });
     } catch (error) {
-      dispatch({ type: AUTH_ERROR });
+      console.log(error.response.data.error);
+      dispatch({ type: AUTH_ERROR, payload: error.response.data.error });
     }
   };
 };
@@ -57,7 +58,7 @@ export const signOut = () => {
       const response = await axios.get("/api/v1/auth/logout");
       dispatch({ type: SIGN_OUT, payload: response.data });
     } catch (error) {
-      dispatch({ type: AUTH_ERROR });
+      dispatch({ type: AUTH_ERROR, payload: error.response.data.error });
     }
   };
 };

@@ -6,7 +6,7 @@ exports.authGoogle = passport.authenticate("google", {
 });
 
 exports.authGoogleCallback = (req, res) => {
-  res.status(200).redirect("/");
+  res.status(200).redirect("/jobs/home");
 };
 
 exports.authGoogleToken = (req, res) => {

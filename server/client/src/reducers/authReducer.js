@@ -6,21 +6,22 @@ import {
 } from "../actions/types";
 
 const authReducer = (
-  state = { user: null, inProgress: false, error: null },
+  state = { user: null, inProgress: false, signedIn: true },
   action
 ) => {
   switch (action.type) {
     case GET_ME:
-      return { user: action.payload.user, inProgress: false };
+      return { user: action.payload.user, inProgress: false, signedIn: true };
     case AUTH_IN_PROGRESS:
-      return { user: state.user, inProgress: true };
+      return { user: state.user, inProgress: true, signedIn: true };
     case SIGN_OUT:
-      return { user: null, inProgress: false };
+      return { user: null, inProgress: false, signedIn: false };
     case AUTH_ERROR:
       return {
         user: state.user,
         inProgress: false,
-        error: "There is an error",
+        error: action.payload,
+        signedIn: false,
       };
     default:
       return state;
