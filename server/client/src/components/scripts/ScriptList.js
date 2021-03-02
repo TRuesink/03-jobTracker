@@ -25,6 +25,7 @@ class ScriptList extends React.Component {
             <div class="extra">
               <div class="ui right floated primary button">Edit</div>
               <div class="ui label">{script.mode}</div>
+              <div class="ui label">Used: {script.activities.length} times</div>
             </div>
           </div>
         </div>

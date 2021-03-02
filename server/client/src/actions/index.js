@@ -1,4 +1,5 @@
 import axios from "axios";
+import history from "../history";
 
 import {
   AUTH_ERROR,
@@ -9,6 +10,7 @@ import {
   CREATE_NOTE,
   CREATE_OPPORTUNITY,
   CREATE_SCRIPT,
+  DELETE_OPPORTUNITY,
   EDIT_OPPORTUNITY,
   ERROR,
   ERROR_ACTIVITY,
@@ -109,6 +111,19 @@ export const createOpportunity = (formValues) => {
       dispatch({ type: IN_PROGRESS_OPPORTUNITY });
       const response = await axios.post(`/api/v1/opportunities`, formValues);
       dispatch({ type: CREATE_OPPORTUNITY, payload: response.data });
+    } catch (error) {
+      dispatch({ type: ERROR_OPPORTUNITY });
+    }
+  };
+};
+
+export const deleteOpportunity = (oppId) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: IN_PROGRESS_OPPORTUNITY });
+      await axios.delete(`/api/v1/opportunities/${oppId}`);
+      dispatch({ type: DELETE_OPPORTUNITY, payload: oppId });
+      history.push("/opportunities");
     } catch (error) {
       dispatch({ type: ERROR_OPPORTUNITY });
     }

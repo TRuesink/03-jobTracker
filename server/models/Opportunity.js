@@ -64,6 +64,18 @@ const opportunitySchema = new Schema(
   }
 );
 
+// Cascade delete courses when a bootcamp is deleted
+opportunitySchema.pre("remove", async function (next) {
+  console.log(
+    `Activities, Notes, Contacts and Meetings being removed from opportunity ${this._id}`
+  );
+  await this.model("Activity").deleteMany({ opportunity: this._id });
+  await this.model("Contact").deleteMany({ opportunity: this._id });
+  await this.model("Meeting").deleteMany({ opportunity: this._id });
+  await this.model("Note").deleteMany({ opportunity: this._id });
+  next();
+});
+
 // reverse populate with activites
 opportunitySchema.virtual("activities", {
   ref: "Activity",

@@ -25,10 +25,10 @@ class App extends React.Component {
         <Router history={history}>
           <Header />
           <div style={{ margin: "1rem" }} className="ui stackable grid">
-            <div className="four wide column">
+            <div className="three wide column">
               <SideMenu />
             </div>
-            <div className="twelve wide column">
+            <div className="thirteen wide column">
               <Switch>
                 <Route path="/home" exact component={Home} />
                 <Route

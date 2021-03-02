@@ -41,6 +41,11 @@ const opportunityReducer = (state = INIT_STATE, action) => {
         data: { ...state.data, [action.payload.data._id]: action.payload.data },
         inProgress: false,
       };
+    case DELETE_OPPORTUNITY:
+      return {
+        data: _.omit(state.data, action.payload),
+        inProgress: false,
+      };
     case ERROR_OPPORTUNITY:
       return {
         data: { ...state.data },
