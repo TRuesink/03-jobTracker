@@ -7,7 +7,13 @@ import OpportunityList from "./opportunities/OpportunityList";
 import SideMenu from "./SideMenu";
 
 import { connect } from "react-redux";
-import { getMe } from "../actions";
+import {
+  getMe,
+  fetchOpportunities,
+  fetchActivities,
+  fetchContacts,
+  fetchMeetings,
+} from "../actions";
 import OpportunityDetail from "./opportunities/OpportunityDetail";
 import ActivityList from "./activities/ActivityList";
 import ContactList from "./contacts/ContactList";
@@ -20,6 +26,14 @@ class App extends React.Component {
   componentDidMount() {
     this.props.getMe();
   }
+  // componentDidUpdate() {
+  //   if (this.props.auth.user) {
+  //     this.props.fetchOpportunities();
+  //     this.props.fetchActivities();
+  //     this.props.fetchContacts();
+  //     this.props.fetchMeetings();
+  //   }
+  // }
   render() {
     return (
       <div>
@@ -27,46 +41,26 @@ class App extends React.Component {
           <Header />
           <div style={{ margin: "1rem" }} className="ui stackable grid">
             <div className="three wide column">
-              <Route path="/jobs" component={requireAuth(SideMenu)} />
+              <Route path="/jobs" component={SideMenu} />
             </div>
             <div className="thirteen wide column">
               <Switch>
-                <Route path="/jobs/home" exact component={requireAuth(Home)} />
+                <Route path="/jobs/home" exact component={Home} />
                 <Route
                   path="/jobs/opportunities/:id"
                   exact
-                  component={requireAuth(OpportunityDetail)}
+                  component={OpportunityDetail}
                 />
                 <Route
                   path="/jobs/opportunities"
                   exact
-                  component={requireAuth(OpportunityList)}
+                  component={OpportunityList}
                 />
-                <Route
-                  path="/jobs/activities"
-                  exact
-                  component={requireAuth(ActivityList)}
-                />
-                <Route
-                  path="/jobs/contacts"
-                  exact
-                  component={requireAuth(ContactList)}
-                />
-                <Route
-                  path="/jobs/meetings"
-                  exact
-                  component={requireAuth(MeetingList)}
-                />
-                <Route
-                  path="/jobs/notes"
-                  exact
-                  component={requireAuth(NoteList)}
-                />
-                <Route
-                  path="/jobs/scripts"
-                  exact
-                  component={requireAuth(ScriptList)}
-                />
+                <Route path="/jobs/activities" exact component={ActivityList} />
+                <Route path="/jobs/contacts" exact component={ContactList} />
+                <Route path="/jobs/meetings" exact component={MeetingList} />
+                <Route path="/jobs/notes" exact component={NoteList} />
+                <Route path="/jobs/scripts" exact component={ScriptList} />
               </Switch>
             </div>
           </div>
@@ -76,4 +70,16 @@ class App extends React.Component {
   }
 }
 
-export default connect(null, { getMe })(App);
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+  };
+};
+
+export default connect(mapStateToProps, {
+  getMe,
+  fetchOpportunities,
+  fetchActivities,
+  fetchContacts,
+  fetchMeetings,
+})(App);

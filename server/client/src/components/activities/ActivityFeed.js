@@ -31,7 +31,7 @@ class ActivityFeed extends React.Component {
           <div key={act._id} className="event">
             <div className="content">
               <div className="summary">
-                <Link to={`/opportunities/${act.opportunity._id}`}>
+                <Link to={`/jobs/opportunities/${act.opportunity._id}`}>
                   {act.opportunity.name}
                 </Link>{" "}
                 - {act.description}
@@ -66,7 +66,7 @@ class ActivityFeed extends React.Component {
           <CreateActivity oppId={this.props.oppId} />
         </div>
         <div className="ui segment">
-          <div className="ui feed">{this.renderActivities()}</div>
+          <div className="ui feed small">{this.renderActivities()}</div>
         </div>
       </div>
     );
@@ -76,6 +76,7 @@ class ActivityFeed extends React.Component {
 const mapStateToProps = (state) => {
   return {
     activities: Object.values(state.activities.data),
+    auth: state.auth,
   };
 };
 

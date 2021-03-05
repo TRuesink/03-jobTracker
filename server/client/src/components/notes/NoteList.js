@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchNotes } from "../../actions";
 import CreateNote from "./CreateNote";
+import requireAuth from "../requireAuth";
 
 class NoteList extends React.Component {
   componentDidMount() {
@@ -59,7 +60,7 @@ class NoteList extends React.Component {
           className="ui segment"
         >
           <div class={loaderClass}></div>
-          <table class="ui compact very basic table">
+          <table class="ui compact small very basic table">
             <thead class="full-width">
               <tr>
                 <th style={{ paddingLeft: "0.7em" }} className="three wide">
@@ -79,6 +80,8 @@ class NoteList extends React.Component {
     );
   }
 }
+
+NoteList = requireAuth(NoteList);
 
 const mapStateToProps = (state) => {
   return {

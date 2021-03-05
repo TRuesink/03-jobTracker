@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { fetchOpportunity } from "../../actions";
 import OpportunityHeader from "./OpportunityHeader";
 import OpportunityRelated from "./OpportunityRelated";
+import requireAuth from "../requireAuth";
 
 class OpportunityDetail extends React.Component {
   componentDidMount() {
@@ -19,6 +20,8 @@ class OpportunityDetail extends React.Component {
     );
   }
 }
+
+OpportunityDetail = requireAuth(OpportunityDetail);
 
 const mapStateToProps = (state, ownProps) => {
   return {

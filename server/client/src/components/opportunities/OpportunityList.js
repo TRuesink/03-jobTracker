@@ -6,6 +6,7 @@ import { Form } from "semantic-ui-react";
 import { fetchOpportunities, editOpportunity } from "../../actions";
 
 import CreateOpportunity from "./CreateOpportunity";
+import requireAuth from "../requireAuth";
 
 const stageOptions = [
   {
@@ -47,7 +48,9 @@ const stageOptions = [
 
 class OpportunityList extends React.Component {
   componentDidMount() {
-    this.props.fetchOpportunities();
+    if (this.props.auth.signedIn) {
+      this.props.fetchOpportunities();
+    }
   }
 
   renderDropdown({ input, options }) {
@@ -130,7 +133,7 @@ class OpportunityList extends React.Component {
           className="ui segment"
         >
           <div class={loaderClass}></div>
-          <table class="ui compact selectable very basic table">
+          <table class="ui compact small selectable very basic table">
             <thead class="full-width">
               <tr>
                 <th style={{ paddingLeft: "0.7em" }}>Name</th>
@@ -149,10 +152,13 @@ class OpportunityList extends React.Component {
   }
 }
 
+OpportunityList = requireAuth(OpportunityList);
+
 const mapStateToProps = (state) => {
   return {
     opportunities: Object.values(state.opportunities.data),
     inProgress: state.opportunities.inProgress,
+    auth: state.auth,
   };
 };
 

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchMeetings } from "../../actions";
 import CreateMeeting from "./CreateMeeting";
+import requireAuth from "../requireAuth";
 
 class MeetingList extends React.Component {
   componentDidMount() {
@@ -65,7 +66,7 @@ class MeetingList extends React.Component {
           className="ui segment"
         >
           <div class={loaderClass}></div>
-          <table class="ui compact very basic table">
+          <table class="ui compact small very basic table">
             <thead class="full-width">
               <tr>
                 <th style={{ paddingLeft: "0.7em" }} className="three wide">
@@ -87,6 +88,8 @@ class MeetingList extends React.Component {
     );
   }
 }
+
+MeetingList = requireAuth(MeetingList);
 
 const mapStateToProps = (state) => {
   return {

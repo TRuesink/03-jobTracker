@@ -9,14 +9,16 @@ import {
 import ActivityFeed from "../activities/ActivityFeed";
 import OpportunityList from "../opportunities/OpportunityList";
 import UserStats from "./UserStats";
+import requireAuth from "../requireAuth";
 
 class Home extends React.Component {
   componentDidMount() {
-    this.props.fetchOpportunities();
-    this.props.fetchActivities();
-    this.props.fetchContacts();
-    this.props.fetchMeetings();
+    if (this.props.auth.signedIn) {
+      this.props.fetchContacts();
+      this.props.fetchMeetings();
+    }
   }
+
   render() {
     return (
       <div>
@@ -36,7 +38,15 @@ class Home extends React.Component {
   }
 }
 
-export default connect(null, {
+Home = requireAuth(Home);
+
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+  };
+};
+
+export default connect(mapStateToProps, {
   fetchOpportunities,
   fetchActivities,
   fetchContacts,

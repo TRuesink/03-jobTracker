@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchActivities } from "../../actions";
 import CreateActivity from "./CreateActivity";
+import requireAuth from "../requireAuth";
 
 class ActivityList extends React.Component {
   componentDidMount() {
@@ -57,7 +58,7 @@ class ActivityList extends React.Component {
           className="ui segment"
         >
           <div class={loaderClass}></div>
-          <table class="ui compact very basic table">
+          <table class="ui compact small very basic table">
             <thead class="full-width">
               <tr>
                 <th style={{ paddingLeft: "0.7em" }} className="three wide">
@@ -78,6 +79,8 @@ class ActivityList extends React.Component {
     );
   }
 }
+
+ActivityList = requireAuth(ActivityList);
 
 const mapStateToProps = (state) => {
   return {

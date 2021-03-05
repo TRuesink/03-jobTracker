@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchContacts } from "../../actions";
 import CreateContact from "./CreateContact";
+import requireAuth from "../requireAuth";
 
 class ContactList extends React.Component {
   componentDidMount() {
@@ -61,7 +62,7 @@ class ContactList extends React.Component {
           className="ui segment"
         >
           <div class={loaderClass}></div>
-          <table class="ui compact very basic table">
+          <table class="ui compact small very basic table">
             <thead class="full-width">
               <tr>
                 <th style={{ paddingLeft: "0.7em" }} className="three wide">
@@ -83,6 +84,8 @@ class ContactList extends React.Component {
     );
   }
 }
+
+ContactList = requireAuth(ContactList);
 
 const mapStateToProps = (state) => {
   return {

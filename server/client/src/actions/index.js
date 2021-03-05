@@ -124,7 +124,7 @@ export const deleteOpportunity = (oppId) => {
       dispatch({ type: IN_PROGRESS_OPPORTUNITY });
       await axios.delete(`/api/v1/opportunities/${oppId}`);
       dispatch({ type: DELETE_OPPORTUNITY, payload: oppId });
-      history.push("/opportunities");
+      history.push("/jobs/opportunities");
     } catch (error) {
       dispatch({ type: ERROR_OPPORTUNITY });
     }

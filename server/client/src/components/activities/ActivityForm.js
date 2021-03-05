@@ -37,6 +37,7 @@ class ActivityForm extends React.Component {
         options={optionsArray}
         onChange={(e, { value }) => input.onChange(value)}
         disabled={disabled}
+        clearable={true}
       />
     );
   }

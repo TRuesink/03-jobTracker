@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import requireAuth from "./requireAuth";
 
 class SideMenu extends React.Component {
   render() {
@@ -31,4 +32,4 @@ class SideMenu extends React.Component {
   }
 }
 
-export default SideMenu;
+export default requireAuth(SideMenu);

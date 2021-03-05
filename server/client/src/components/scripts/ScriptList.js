@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchScripts } from "../../actions";
 import CreateScript from "./CreateScript";
+import requireAuth from "../requireAuth";
 
 class ScriptList extends React.Component {
   componentDidMount() {
@@ -59,6 +60,8 @@ class ScriptList extends React.Component {
     );
   }
 }
+
+ScriptList = requireAuth(ScriptList);
 
 const mapStateToProps = (state) => {
   return {
