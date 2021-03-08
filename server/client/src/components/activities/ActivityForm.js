@@ -50,6 +50,10 @@ class ActivityForm extends React.Component {
         className="ui form"
       >
         <div className="field">
+          <label>Activity Date</label>
+          <Field name="createdAt" component="input" type="date" />
+        </div>
+        <div className="field">
           <label>What oppportunity is this related to?</label>
           {this.props.opportunities.length === 0 ? null : (
             <Field

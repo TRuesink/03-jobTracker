@@ -20,9 +20,12 @@ class EditActivity extends React.Component {
     let initValues = { ...this.props.activities[this.props.activityId] };
 
     initValues.opportunity = initValues.opportunity.id;
+    const date = new Date(initValues.createdAt);
+    initValues.createdAt = date.toISOString().split("T")[0];
     if (initValues.contact) {
       initValues.contact = initValues.contact.id;
     }
+
     return (
       <Modal
         onClose={() => this.changeModalState(false)}
@@ -43,7 +46,7 @@ class EditActivity extends React.Component {
               initialValues={_.pick(initValues, [
                 "contact",
                 "description",
-                "date",
+                "createdAt",
                 "opportunity",
               ])}
             />
