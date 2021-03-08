@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { fetchContacts } from "../../actions";
 import CreateContact from "./CreateContact";
 import requireAuth from "../requireAuth";
+import EditContact from "./EditContact";
 
 class ContactList extends React.Component {
   componentDidMount() {
@@ -27,7 +28,10 @@ class ContactList extends React.Component {
     return contactList.map((contact) => {
       return (
         <tr>
-          <td style={{ paddingLeft: "0.7em" }}>{contact.name}</td>
+          <td style={{ paddingLeft: "0.7em" }}>
+            <EditContact contactId={contact._id} />
+            {contact.name}
+          </td>
           <td>{contact.role}</td>
           <td>{contact.email}</td>
           <td>{contact.touches}</td>

@@ -11,6 +11,7 @@ import {
   CREATE_OPPORTUNITY,
   CREATE_SCRIPT,
   DELETE_OPPORTUNITY,
+  EDIT_CONTACT,
   EDIT_OPPORTUNITY,
   ERROR,
   ERROR_ACTIVITY,
@@ -20,6 +21,7 @@ import {
   ERROR_OPPORTUNITY,
   ERROR_SCRIPT,
   FETCH_ACTIVITIES,
+  FETCH_CONTACT,
   FETCH_CONTACTS,
   FETCH_MEETINGS,
   FETCH_NOTES,
@@ -193,6 +195,33 @@ export const createContact = (oppId, formValues) => {
         formValues
       );
       dispatch({ type: CREATE_CONTACT, payload: response.data });
+    } catch (error) {
+      dispatch({ type: ERROR_CONTACT });
+    }
+  };
+};
+
+export const editContact = (contactId, formValues) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: IN_PROGRESS_CONTACT });
+      const response = await axios.put(
+        `/api/v1/contacts/${contactId}`,
+        formValues
+      );
+      dispatch({ type: EDIT_CONTACT, payload: response.data });
+    } catch (error) {
+      dispatch({ type: ERROR_CONTACT });
+    }
+  };
+};
+
+export const fetchContact = (contactId) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: IN_PROGRESS_CONTACT });
+      const response = await axios.get(`/api/v1/contacts/${contactId}`);
+      dispatch({ type: FETCH_CONTACT, payload: response.data });
     } catch (error) {
       dispatch({ type: ERROR_CONTACT });
     }

@@ -136,9 +136,11 @@ class OpportunityList extends React.Component {
           <table class="ui compact small selectable very basic table">
             <thead class="full-width">
               <tr>
-                <th style={{ paddingLeft: "0.7em" }}>Name</th>
-                <th>Stage</th>
-                <th>Last Activity</th>
+                <th className="five wide" style={{ paddingLeft: "0.7em" }}>
+                  Name
+                </th>
+                <th className="seven wide">Stage</th>
+                <th className="four wide">Last Activity</th>
               </tr>
             </thead>
             <tbody>{this.renderOpportunities()}</tbody>
