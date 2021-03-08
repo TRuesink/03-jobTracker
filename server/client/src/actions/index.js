@@ -11,6 +11,7 @@ import {
   CREATE_OPPORTUNITY,
   CREATE_SCRIPT,
   DELETE_OPPORTUNITY,
+  EDIT_ACTIVITY,
   EDIT_CONTACT,
   EDIT_OPPORTUNITY,
   ERROR,
@@ -161,6 +162,21 @@ export const createActivity = (oppId, formValues) => {
         formValues
       );
       dispatch({ type: CREATE_ACTIVITY, payload: response.data });
+    } catch (error) {
+      dispatch({ type: ERROR_ACTIVITY });
+    }
+  };
+};
+
+export const editActivity = (activityId, formValues) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: IN_PROGRESS_ACTIVITY });
+      const response = await axios.put(
+        `/api/v1/activities/${activityId}`,
+        formValues
+      );
+      dispatch({ type: EDIT_ACTIVITY, payload: response.data });
     } catch (error) {
       dispatch({ type: ERROR_ACTIVITY });
     }

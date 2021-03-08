@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { fetchActivities } from "../../actions";
 import CreateActivity from "./CreateActivity";
 import requireAuth from "../requireAuth";
+import EditActivity from "./EditActivity";
 
 class ActivityList extends React.Component {
   componentDidMount() {
@@ -19,7 +20,10 @@ class ActivityList extends React.Component {
       .map((act) => {
         return (
           <tr>
-            <td style={{ paddingLeft: "0.7em" }}>{act.opportunity.name}</td>
+            <td style={{ paddingLeft: "0.7em" }}>
+              <EditActivity activityId={act._id} />
+              {act.opportunity.name}
+            </td>
             <td>{act.contact ? act.contact.name : ""}</td>
             <td>{act.description}</td>
             <td>

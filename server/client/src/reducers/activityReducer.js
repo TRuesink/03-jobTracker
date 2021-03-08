@@ -32,6 +32,11 @@ const activityReducer = (state = INIT_STATE, action) => {
         data: { ...state.data, [action.payload.data._id]: action.payload.data },
         inProgress: false,
       };
+    case EDIT_ACTIVITY:
+      return {
+        data: { ...state.data, [action.payload.data._id]: action.payload.data },
+        inProgress: false,
+      };
     case ERROR_ACTIVITY:
       return {
         data: { ...state.data },
