@@ -1,5 +1,5 @@
 import React from "react";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, SubmissionError } from "redux-form";
 import { Form } from "semantic-ui-react";
 
 const stageOptions = [
@@ -122,72 +122,139 @@ class OpportunityForm extends React.Component {
     this.props.closeModal(false);
   };
 
-  renderDropdown({ input, options }) {
+  renderDropdown({ input, options, meta, label }) {
+    const errorClass = meta.error && meta.touched ? "error" : null;
     return (
-      <Form.Select
-        {...input}
-        fluid
-        selection
-        options={options}
-        onChange={(e, { value }) => input.onChange(value)}
-      />
+      <div className={`field ${errorClass}`}>
+        <label>{label}</label>
+        <Form.Select
+          {...input}
+          fluid
+          selection
+          options={options}
+          onChange={(e, { value }) => input.onChange(value)}
+          clearable={true}
+        />
+        {meta.error && meta.touched ? (
+          <span style={{ color: "#9F3A38" }}>{meta.error}</span>
+        ) : null}
+      </div>
+    );
+  }
+
+  renderInput({ input, meta, label, type }) {
+    const errorClass = meta.error && meta.touched ? "error" : null;
+    return (
+      <div className={`field ${errorClass}`}>
+        <label>{label}</label>
+        <input {...input} type={type}></input>
+        {meta.error && meta.touched ? (
+          <span style={{ color: "#9F3A38" }}>{meta.error}</span>
+        ) : null}
+      </div>
+    );
+  }
+
+  renderTextArea({ input, meta, label, rows }) {
+    const errorClass = meta.error && meta.touched ? "error" : null;
+    return (
+      <div className={`field ${errorClass}`}>
+        <label>{label}</label>
+        <textarea {...input} rows={rows}></textarea>
+        {meta.error && meta.touched ? (
+          <span style={{ color: "#9F3A38" }}>{meta.error}</span>
+        ) : null}
+      </div>
     );
   }
 
   render() {
+    console.log(this.props);
     return (
       <form
         id="oppForm"
         onSubmit={this.props.handleSubmit(this.onFormSubmit)}
         className="ui form"
       >
-        <div className="two fields">
-          <div className="field">
-            <label>Name</label>
-            <Field name="name" component="input" type="text" />
-          </div>
-          <div className="field">
-            <label>Size</label>
-            <Field
-              name="size"
-              component={this.renderDropdown}
-              options={sizeOptions}
-            />
-          </div>
+        <div className="ui error message">
+          <div className="header">Action Forbidden</div>
+          <p>
+            You can only sign up for an account once with a given e-mail
+            address.
+          </p>
         </div>
         <div className="two fields">
-          <div className="field">
-            <label>Location</label>
-            <Field name="location" component="input" type="text" />
-          </div>
-          <div className="field">
-            <label>Industry</label>
-            <Field
-              name="industry"
-              component={this.renderDropdown}
-              options={industryOptions}
-            />
-          </div>
+          <Field
+            name="name"
+            type="text"
+            component={this.renderInput}
+            label="Name"
+          />
+          <Field
+            name="size"
+            component={this.renderDropdown}
+            options={sizeOptions}
+            label="Size"
+          />
         </div>
         <div className="two fields">
-          <div className="field">
-            <label>Stage</label>
-            <Field
-              name="stage"
-              component={this.renderDropdown}
-              options={stageOptions}
-            />
-          </div>
-          <div className="field">
-            <label>About</label>
-            <Field name="about" component="textarea" rows="3" />
-          </div>
+          <Field
+            name="location"
+            component={this.renderInput}
+            type="text"
+            label="Location"
+          />
+          <Field
+            name="industry"
+            component={this.renderDropdown}
+            options={industryOptions}
+            label="Industry"
+          />
+        </div>
+        <div className="two fields">
+          <Field
+            name="stage"
+            component={this.renderDropdown}
+            options={stageOptions}
+            label="Stage"
+          />
+          <Field
+            name="about"
+            rows="3"
+            component={this.renderTextArea}
+            label="About"
+          />
         </div>
       </form>
     );
   }
 }
 
+const validate = (formValues) => {
+  const errors = {};
+  if (!formValues.name) {
+    errors.name = "Enter an opportunity name";
+  }
+  if (!formValues.size) {
+    errors.size = "Enter employee count of company";
+  }
+  if (!formValues.location) {
+    errors.location = "Enter location of opportunity";
+  }
+  if (!formValues.industry) {
+    errors.industry = "Enter industry of opportunity";
+  }
+  if (!formValues.stage) {
+    errors.stage = "Enter the current stage opportunity is in";
+  }
+  if (!formValues.about) {
+    errors.about = "Describe the company / opportunity";
+  }
+  console.log(errors);
+  return errors;
+};
+
 export default reduxForm({
   form: "opportunityForm",
+  validate: validate,
 })(OpportunityForm);
