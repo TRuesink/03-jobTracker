@@ -25,7 +25,7 @@ class CreateScript extends React.Component {
           </Button>
         }
       >
-        <Modal.Header>Create A Note</Modal.Header>
+        <Modal.Header>Create A Script</Modal.Header>
         <Modal.Content>
           <div>
             <ScriptForm

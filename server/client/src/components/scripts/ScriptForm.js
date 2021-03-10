@@ -50,15 +50,49 @@ class ScriptForm extends React.Component {
     this.props.closeModal(false);
   };
 
-  renderDropdown({ input, options }) {
+  renderDropdown({ input, options, label, meta }) {
+    const errorClass = meta.error && meta.touched ? "error" : null;
     return (
-      <Form.Select
-        {...input}
-        fluid
-        selection
-        options={options}
-        onChange={(e, { value }) => input.onChange(value)}
-      />
+      <div className={`field ${errorClass}`}>
+        <label>{label}</label>
+        <Form.Select
+          {...input}
+          fluid
+          selection
+          options={options}
+          onChange={(e, { value }) => input.onChange(value)}
+          clearable={true}
+        />
+        {meta.error && meta.touched ? (
+          <span style={{ color: "#9F3A38" }}>{meta.error}</span>
+        ) : null}
+      </div>
+    );
+  }
+
+  renderInput({ input, meta, label }) {
+    const errorClass = meta.error && meta.touched ? "error" : null;
+    return (
+      <div className={`field ${errorClass}`}>
+        <label>{label}</label>
+        <input {...input} type="text"></input>
+        {meta.error && meta.touched ? (
+          <span style={{ color: "#9F3A38" }}>{meta.error}</span>
+        ) : null}
+      </div>
+    );
+  }
+
+  renderTextArea({ input, meta, label }) {
+    const errorClass = meta.error && meta.touched ? "error" : null;
+    return (
+      <div className={`field ${errorClass}`}>
+        <label>{label}</label>
+        <textarea {...input} rows="7"></textarea>
+        {meta.error && meta.touched ? (
+          <span style={{ color: "#9F3A38" }}>{meta.error}</span>
+        ) : null}
+      </div>
     );
   }
 
@@ -69,35 +103,47 @@ class ScriptForm extends React.Component {
         onSubmit={this.props.handleSubmit(this.onFormSubmit)}
         className="ui form"
       >
-        <div className="field">
-          <label>Purpose of Message</label>
-          <Field name="purpose" component="input" type="text" />
-        </div>
-        <div className="field">
-          <label>Recipient Type</label>
-          <Field
-            name="recipient"
-            component={this.renderDropdown}
-            options={recipientOptions}
-          />
-        </div>
-        <div className="field">
-          <label>Mode of Communication</label>
-          <Field
-            name="mode"
-            component={this.renderDropdown}
-            options={modeOptions}
-          />
-        </div>
-        <div className="field">
-          <label>Script</label>
-          <Field name="message" component="textarea" row="3" />
-        </div>
+        <Field
+          name="purpose"
+          component={this.renderInput}
+          label="Purpose of Message"
+        />
+        <Field
+          name="recipient"
+          component={this.renderDropdown}
+          options={recipientOptions}
+          label="Recipient Type"
+        />
+        <Field
+          name="mode"
+          component={this.renderDropdown}
+          options={modeOptions}
+          label="Mode of Communication"
+        />
+        <Field name="message" component={this.renderTextArea} label="Script" />
       </form>
     );
   }
 }
 
+const validate = (formValues) => {
+  const errors = {};
+  if (!formValues.purpose) {
+    errors.purpose = "Describe purpose of message";
+  }
+  if (!formValues.recipient) {
+    errors.recipient = "What type of stakeholder are you messaging";
+  }
+  if (!formValues.mode) {
+    errors.mode = "Select the mode of communication";
+  }
+  if (!formValues.message) {
+    errors.message = "Fill out a message script here";
+  }
+  return errors;
+};
+
 export default reduxForm({
   form: "scriptForm",
+  validate: validate,
 })(ScriptForm);
