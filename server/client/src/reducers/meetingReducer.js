@@ -32,6 +32,11 @@ const meetingReducer = (state = INIT_STATE, action) => {
         data: { ...state.data, [action.payload.data._id]: action.payload.data },
         inProgress: false,
       };
+    case EDIT_MEETING:
+      return {
+        data: { ...state.data, [action.payload.data._id]: action.payload.data },
+        inProgress: false,
+      };
     case ERROR_MEETING:
       return {
         data: { ...state.data },

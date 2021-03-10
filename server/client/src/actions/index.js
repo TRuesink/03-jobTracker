@@ -13,6 +13,7 @@ import {
   DELETE_OPPORTUNITY,
   EDIT_ACTIVITY,
   EDIT_CONTACT,
+  EDIT_MEETING,
   EDIT_OPPORTUNITY,
   ERROR,
   ERROR_ACTIVITY,
@@ -273,6 +274,21 @@ export const createMeeting = (oppId, formValues) => {
         formValues
       );
       dispatch({ type: CREATE_MEETING, payload: response.data });
+    } catch (error) {
+      dispatch({ type: ERROR_MEETING });
+    }
+  };
+};
+
+export const editMeeting = (meetingId, formValues) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: IN_PROGRESS_MEETING });
+      const response = await axios.put(
+        `/api/v1/meetings/${meetingId}`,
+        formValues
+      );
+      dispatch({ type: EDIT_MEETING, payload: response.data });
     } catch (error) {
       dispatch({ type: ERROR_MEETING });
     }

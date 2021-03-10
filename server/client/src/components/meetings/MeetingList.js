@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { fetchMeetings } from "../../actions";
 import CreateMeeting from "./CreateMeeting";
 import requireAuth from "../requireAuth";
+import EditMeeting from "./EditMeeting";
 
 class MeetingList extends React.Component {
   componentDidMount() {
@@ -27,10 +28,13 @@ class MeetingList extends React.Component {
     return meetingList.map((meeting) => {
       return (
         <tr>
-          <td style={{ paddingLeft: "0.7em" }}>{meeting.topic}</td>
+          <td style={{ paddingLeft: "0.7em" }}>
+            <EditMeeting meetingId={meeting._id} />
+            {meeting.topic}
+          </td>
           <td>
             {meeting.meetingDate
-              ? new Date(meeting.meetingDate).toLocaleDateString()
+              ? new Date(meeting.meetingDate).toISOString().split("T")[0]
               : ""}
           </td>
           <td>{meeting.opportunity ? meeting.opportunity.name : ""}</td>
