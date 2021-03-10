@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { fetchScripts } from "../../actions";
 import CreateScript from "./CreateScript";
 import requireAuth from "../requireAuth";
+import EditScript from "./EditScript";
 
 class ScriptList extends React.Component {
   componentDidMount() {
@@ -24,7 +25,7 @@ class ScriptList extends React.Component {
               <p>{script.message}</p>
             </div>
             <div class="extra">
-              <div class="ui right floated primary button">Edit</div>
+              <EditScript scriptId={script._id} />
               <div class="ui label">{script.mode}</div>
               <div class="ui label">Used: {script.activities.length} times</div>
             </div>

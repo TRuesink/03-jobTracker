@@ -88,7 +88,7 @@ class ScriptForm extends React.Component {
     return (
       <div className={`field ${errorClass}`}>
         <label>{label}</label>
-        <textarea {...input} rows="7"></textarea>
+        <textarea {...input} rows="9"></textarea>
         {meta.error && meta.touched ? (
           <span style={{ color: "#9F3A38" }}>{meta.error}</span>
         ) : null}

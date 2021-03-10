@@ -32,6 +32,11 @@ const scriptReducer = (state = INIT_STATE, action) => {
         data: { ...state.data, [action.payload.data._id]: action.payload.data },
         inProgress: false,
       };
+    case EDIT_SCRIPT:
+      return {
+        data: { ...state.data, [action.payload.data._id]: action.payload.data },
+        inProgress: false,
+      };
     case ERROR_SCRIPT:
       return {
         data: { ...state.data },

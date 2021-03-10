@@ -32,6 +32,11 @@ const noteReducer = (state = INIT_STATE, action) => {
         data: { ...state.data, [action.payload.data._id]: action.payload.data },
         inProgress: false,
       };
+    case EDIT_NOTE:
+      return {
+        data: { ...state.data, [action.payload.data._id]: action.payload.data },
+        inProgress: false,
+      };
     case ERROR_NOTE:
       return {
         data: { ...state.data },

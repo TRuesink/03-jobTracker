@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { fetchNotes } from "../../actions";
 import CreateNote from "./CreateNote";
 import requireAuth from "../requireAuth";
+import EditNote from "./EditNote";
 
 class NoteList extends React.Component {
   componentDidMount() {
@@ -27,7 +28,10 @@ class NoteList extends React.Component {
     return noteList.map((note) => {
       return (
         <tr>
-          <td style={{ paddingLeft: "0.7em" }}>{note.opportunity.name}</td>
+          <td style={{ paddingLeft: "0.7em" }}>
+            <EditNote noteId={note._id} />
+            {note.opportunity.name}
+          </td>
           <td>{note.content}</td>
           <td>{new Date(note.createdAt).toLocaleDateString()}</td>
         </tr>

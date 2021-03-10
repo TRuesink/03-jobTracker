@@ -14,19 +14,41 @@ class NoteForm extends React.Component {
     this.props.closeModal(false);
   };
 
-  renderDropdown({ input, options, disabled }) {
+  renderDropdown({ input, options, disabled, label, meta }) {
     const optionsArray = options.map((opt) => {
       return { key: opt._id, text: opt.name, value: opt._id };
     });
+    const errorClass = meta.error && meta.touched ? "error" : null;
     return (
-      <Form.Select
-        {...input}
-        fluid
-        selection
-        options={optionsArray}
-        onChange={(e, { value }) => input.onChange(value)}
-        disabled={disabled}
-      />
+      <div className={`field ${errorClass}`}>
+        <label>{label}</label>
+        {options.length === 0 ? null : (
+          <Form.Select
+            {...input}
+            fluid
+            selection
+            options={optionsArray}
+            onChange={(e, { value }) => input.onChange(value)}
+            disabled={disabled}
+            clearable={true}
+          />
+        )}
+        {meta.error && meta.touched ? (
+          <span style={{ color: "#9F3A38" }}>{meta.error}</span>
+        ) : null}
+      </div>
+    );
+  }
+  renderTextArea({ input, meta, label }) {
+    const errorClass = meta.error && meta.touched ? "error" : null;
+    return (
+      <div className={`field ${errorClass}`}>
+        <label>{label}</label>
+        <textarea {...input} rows="7"></textarea>
+        {meta.error && meta.touched ? (
+          <span style={{ color: "#9F3A38" }}>{meta.error}</span>
+        ) : null}
+      </div>
     );
   }
 
@@ -37,28 +59,33 @@ class NoteForm extends React.Component {
         onSubmit={this.props.handleSubmit(this.onFormSubmit)}
         className="ui form"
       >
-        <div className="field">
-          <label>What ppportunity is this related to?</label>
-          {this.props.opportunities.length === 0 ? null : (
-            <Field
-              name="opportunity"
-              component={this.renderDropdown}
-              options={this.props.opportunities}
-              disabled={this.props.initialValues ? true : false}
-            />
-          )}
-        </div>
-        <div className="field">
-          <label>Note</label>
-          <Field name="content" component="textarea" row="3" />
-        </div>
+        <Field
+          name="opportunity"
+          component={this.renderDropdown}
+          options={this.props.opportunities}
+          disabled={this.props.initialValues ? true : false}
+          label="What opportunity is this related to?"
+        />
+        <Field name="content" component={this.renderTextArea} label="Note" />
       </form>
     );
   }
 }
 
+const validate = (formValues) => {
+  const errors = {};
+  if (!formValues.opportunity) {
+    errors.opportunity = "Please select related opportunity";
+  }
+  if (!formValues.content) {
+    errors.content = "Fill out note";
+  }
+  return errors;
+};
+
 NoteForm = reduxForm({
   form: "noteForm",
+  validate: validate,
 })(NoteForm);
 
 const mapStateToProps = (state) => {

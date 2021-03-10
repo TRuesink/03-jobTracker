@@ -14,7 +14,9 @@ import {
   EDIT_ACTIVITY,
   EDIT_CONTACT,
   EDIT_MEETING,
+  EDIT_NOTE,
   EDIT_OPPORTUNITY,
+  EDIT_SCRIPT,
   ERROR,
   ERROR_ACTIVITY,
   ERROR_CONTACT,
@@ -329,6 +331,18 @@ export const createNote = (oppId, formValues) => {
   };
 };
 
+export const editNote = (noteId, formValues) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: IN_PROGRESS_NOTE });
+      const response = await axios.put(`/api/v1/notes/${noteId}`, formValues);
+      dispatch({ type: EDIT_NOTE, payload: response.data });
+    } catch (error) {
+      dispatch({ type: ERROR_NOTE });
+    }
+  };
+};
+
 // ---------------- Script Action Creators ------------------- //
 
 export const fetchScripts = () => {
@@ -349,6 +363,21 @@ export const createScript = (formValues) => {
       dispatch({ type: IN_PROGRESS_SCRIPT });
       const response = await axios.post("/api/v1/scripts", formValues);
       dispatch({ type: CREATE_SCRIPT, payload: response.data });
+    } catch (error) {
+      dispatch({ type: ERROR_SCRIPT });
+    }
+  };
+};
+
+export const editScript = (scriptId, formValues) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: IN_PROGRESS_SCRIPT });
+      const response = await axios.put(
+        `/api/v1/scripts/${scriptId}`,
+        formValues
+      );
+      dispatch({ type: EDIT_SCRIPT, payload: response.data });
     } catch (error) {
       dispatch({ type: ERROR_SCRIPT });
     }
