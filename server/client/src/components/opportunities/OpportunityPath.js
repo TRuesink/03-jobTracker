@@ -40,7 +40,7 @@ class OpportunityPath extends React.Component {
             this.props.inProgress ? "active" : "disabled"
           } inverted dimmer`}
         >
-          <div class="ui loader"></div>
+          <div className="ui loader"></div>
         </div>
       </div>
     );

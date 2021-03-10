@@ -27,7 +27,7 @@ class MeetingList extends React.Component {
     }
     return meetingList.map((meeting) => {
       return (
-        <tr>
+        <tr key={"meeting-" + meeting._id}>
           <td style={{ paddingLeft: "0.7em" }}>
             <EditMeeting meetingId={meeting._id} />
             {meeting.topic}
@@ -69,9 +69,9 @@ class MeetingList extends React.Component {
           }}
           className="ui segment"
         >
-          <div class={loaderClass}></div>
-          <table class="ui compact small very basic table">
-            <thead class="full-width">
+          <div className={loaderClass}></div>
+          <table className="ui compact small very basic table">
+            <thead className="full-width">
               <tr>
                 <th style={{ paddingLeft: "0.7em" }} className="three wide">
                   Topic
@@ -83,7 +83,7 @@ class MeetingList extends React.Component {
               </tr>
             </thead>
             <tbody>{this.renderMeetings()}</tbody>
-            <tfoot class="full-width">
+            <tfoot className="full-width">
               <tr></tr>
             </tfoot>
           </table>

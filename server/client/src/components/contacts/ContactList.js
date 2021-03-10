@@ -27,14 +27,14 @@ class ContactList extends React.Component {
     }
     return contactList.map((contact) => {
       return (
-        <tr>
+        <tr key={"contact-" + contact._id}>
           <td style={{ paddingLeft: "0.7em" }}>
             <EditContact contactId={contact._id} />
             {contact.name}
           </td>
           <td>{contact.role}</td>
           <td>{contact.email}</td>
-          <td>{contact.touches}</td>
+          <td>{contact.activities.length}</td>
           <td>{contact.opportunity.name}</td>
         </tr>
       );
@@ -65,9 +65,9 @@ class ContactList extends React.Component {
           }}
           className="ui segment"
         >
-          <div class={loaderClass}></div>
-          <table class="ui compact small very basic table">
-            <thead class="full-width">
+          <div className={loaderClass}></div>
+          <table className="ui compact small very basic table">
+            <thead className="full-width">
               <tr>
                 <th style={{ paddingLeft: "0.7em" }} className="three wide">
                   Name
@@ -79,7 +79,7 @@ class ContactList extends React.Component {
               </tr>
             </thead>
             <tbody>{this.renderContacts()}</tbody>
-            <tfoot class="full-width">
+            <tfoot className="full-width">
               <tr></tr>
             </tfoot>
           </table>

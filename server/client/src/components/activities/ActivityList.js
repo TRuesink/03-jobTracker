@@ -19,7 +19,7 @@ class ActivityList extends React.Component {
       })
       .map((act) => {
         return (
-          <tr>
+          <tr key={"activity-" + act._id}>
             <td style={{ paddingLeft: "0.7em" }}>
               <EditActivity activityId={act._id} />
               {act.opportunity.name}
@@ -61,9 +61,9 @@ class ActivityList extends React.Component {
           }}
           className="ui segment"
         >
-          <div class={loaderClass}></div>
-          <table class="ui compact small very basic table">
-            <thead class="full-width">
+          <div className={loaderClass}></div>
+          <table className="ui compact small very basic table">
+            <thead className="full-width">
               <tr>
                 <th style={{ paddingLeft: "0.7em" }} className="three wide">
                   Opportunity
@@ -74,7 +74,7 @@ class ActivityList extends React.Component {
               </tr>
             </thead>
             <tbody>{this.renderActivities()}</tbody>
-            <tfoot class="full-width">
+            <tfoot className="full-width">
               <tr></tr>
             </tfoot>
           </table>

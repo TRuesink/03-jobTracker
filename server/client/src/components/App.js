@@ -21,6 +21,7 @@ import MeetingList from "./meetings/MeetingList";
 import NoteList from "./notes/NoteList";
 import ScriptList from "./scripts/ScriptList";
 import requireAuth from "./requireAuth";
+import OpportunityDeleted from "./opportunities/OpportunityDeleted";
 
 class App extends React.Component {
   componentDidMount() {
@@ -46,6 +47,11 @@ class App extends React.Component {
             <div className="thirteen wide column">
               <Switch>
                 <Route path="/jobs/home" exact component={Home} />
+                <Route
+                  path="/jobs/opportunities/deleted"
+                  exact
+                  component={OpportunityDeleted}
+                />
                 <Route
                   path="/jobs/opportunities/:id"
                   exact

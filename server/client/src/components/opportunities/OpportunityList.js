@@ -132,9 +132,9 @@ class OpportunityList extends React.Component {
           }}
           className="ui segment"
         >
-          <div class={loaderClass}></div>
-          <table class="ui compact small selectable very basic table">
-            <thead class="full-width">
+          <div className={loaderClass}></div>
+          <table className="ui compact small selectable very basic table">
+            <thead className="full-width">
               <tr>
                 <th className="five wide" style={{ paddingLeft: "0.7em" }}>
                   Name
@@ -144,7 +144,7 @@ class OpportunityList extends React.Component {
               </tr>
             </thead>
             <tbody>{this.renderOpportunities()}</tbody>
-            <tfoot class="full-width">
+            <tfoot className="full-width">
               <tr></tr>
             </tfoot>
           </table>

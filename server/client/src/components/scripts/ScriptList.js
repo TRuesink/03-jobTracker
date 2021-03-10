@@ -15,19 +15,21 @@ class ScriptList extends React.Component {
   renderScripts() {
     return this.props.scripts.map((script) => {
       return (
-        <div class="item">
-          <div class="content">
-            <div class="header">{script.purpose}</div>
-            <div class="meta">
-              <span class="cinema">Recipient: {script.recipient}</span>
+        <div className="item" key={"script-" + script._id}>
+          <div className="content">
+            <div className="header">{script.purpose}</div>
+            <div className="meta">
+              <span className="cinema">Recipient: {script.recipient}</span>
             </div>
-            <div class="description">
+            <div className="description">
               <p>{script.message}</p>
             </div>
-            <div class="extra">
+            <div className="extra">
               <EditScript scriptId={script._id} />
-              <div class="ui label">{script.mode}</div>
-              <div class="ui label">Used: {script.activities.length} times</div>
+              <div className="ui label">{script.mode}</div>
+              <div className="ui label">
+                Used: {script.activities.length} times
+              </div>
             </div>
           </div>
         </div>
@@ -54,7 +56,7 @@ class ScriptList extends React.Component {
         </div>
 
         <div className="ui segment">
-          <div class={loaderClass}></div>
+          <div className={loaderClass}></div>
           <div className="ui divided items">{this.renderScripts()}</div>
         </div>
       </div>

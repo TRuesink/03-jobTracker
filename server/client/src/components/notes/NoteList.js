@@ -27,7 +27,7 @@ class NoteList extends React.Component {
     }
     return noteList.map((note) => {
       return (
-        <tr>
+        <tr key={"note-" + note._id}>
           <td style={{ paddingLeft: "0.7em" }}>
             <EditNote noteId={note._id} />
             {note.opportunity.name}
@@ -63,9 +63,9 @@ class NoteList extends React.Component {
           }}
           className="ui segment"
         >
-          <div class={loaderClass}></div>
-          <table class="ui compact small very basic table">
-            <thead class="full-width">
+          <div className={loaderClass}></div>
+          <table className="ui compact small very basic table">
+            <thead className="full-width">
               <tr>
                 <th style={{ paddingLeft: "0.7em" }} className="three wide">
                   Opportunity
@@ -75,7 +75,7 @@ class NoteList extends React.Component {
               </tr>
             </thead>
             <tbody>{this.renderNotes()}</tbody>
-            <tfoot class="full-width">
+            <tfoot className="full-width">
               <tr></tr>
             </tfoot>
           </table>
